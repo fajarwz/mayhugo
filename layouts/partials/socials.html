@@ -1,0 +1,13 @@
+<div class="flex flex-row justify-center">
+  <ul class="flex flex-wrap list-none mb-0 pl-0">
+    {{ range .Site.Data.social.social_icons }}
+      {{- if isset $.Site.Author .id }}
+        <li class="m-3">
+          <a href="{{ printf .url (index $.Site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
+            <i data-feather="{{ .icon }}"></i>
+          </a>
+        </li>
+      {{- end -}}
+    {{ end }}
+  </ul>
+</div>

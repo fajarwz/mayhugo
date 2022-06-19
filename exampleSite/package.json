@@ -1,0 +1,24 @@
+{
+    "name": "myproject",
+    "version": "1.0.0",
+    "description": "personal web and blog",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "watch:tw": "npx tailwindcss -i ./themes/mayhugo/assets/css/input.css -o ./themes/mayhugo/assets/css/main.css --watch",
+        "watch:hugo": "hugo server",
+        "build:tw": "npx tailwindcss -i ./themes/mayhugo/assets/css/input.css -o ./themes/mayhugo/assets/css/main.css",
+        "build:hugo": "hugo --minify",
+        "dev": "concurrently \"npm run watch:tw\" \"npm run watch:hugo\"",
+        "build": "npm run build:tw && npm run build:hugo"
+    },
+    "keywords": [
+        "personal web",
+        "blog"
+    ],
+    "author": "fajarwz",
+    "license": "",
+    "devDependencies": {
+        "tailwindcss": "^3.1.2"
+    }
+}

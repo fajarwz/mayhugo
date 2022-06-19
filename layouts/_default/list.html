@@ -1,0 +1,17 @@
+{{ define "main" }}
+  <div class="container">
+    <h2 class="mb-11">
+      {{ .Name }} 
+      {{ if gt .Paginator.PageNumber 1 }}
+        {{ $label := printf "%s%d" "Page " .Paginator.PageNumber }}
+        {{ partial "badges/titletag.html" $label }}
+      {{ end }}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      {{ range (.Paginate (.Pages.ByPublishDate.Reverse)).Pages }}
+        {{ partial "cards/post.html" . }}
+      {{ end }}
+    </div>
+    {{ partial "paginator.html" . }}
+  </div>
+{{ end }}

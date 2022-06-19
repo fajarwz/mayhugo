@@ -1,0 +1,14 @@
+{{ $styles := resources.Get "css/main.css" }}
+{{ if .Site.IsServer }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" />
+{{ else }}
+{{ $styles := $styles | minify | fingerprint | resources.PostProcess }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" />
+{{ end }}
+
+<link rel="canonical" href="{{ .Permalink }}" itemprop="url" /> 
+
+{{ with resources.Get (.Site.Params.favicon) }}
+  {{ $favicon := .Fill "16x16 png" }}
+  <link rel="icon" type="image/png" href="{{ $favicon.Permalink }}" sizes="16x16" />
+{{ end }}

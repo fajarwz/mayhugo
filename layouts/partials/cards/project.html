@@ -1,0 +1,63 @@
+<div class="bg-white overflow-hidden rounded-lg shadow-md dark:bg-slate-900 dark:shadow-slate-700">
+
+  <div>
+    <!-- image  -->
+    <div class="overflow-hidden max-h-[208px]">
+      <img src="{{ if isset .Params "featured_image" }}  
+      {{- $image := .Resources.GetMatch (.Params.featured_image) -}}
+      {{- $image = $image.Resize "x208 webp" -}}
+      {{- $image.RelPermalink -}}
+      {{ else }}
+      {{- printf "%s%s" .Site.BaseURL .Site.Params.default_image -}}
+      {{ end }}" class="min-h-[13rem] object-cover w-full" alt="{{ .Title }}'s featured image">
+    </div>
+
+    <!-- body  -->
+    <div class="p-5">
+
+      <!-- title  -->
+      <h3>{{ .Title }}</h3>
+
+      <!-- summary  -->
+      <p class="mb-3">
+        {{- if .Truncated -}} 
+          {{- printf "%s%s" .Summary "..." -}} 
+        {{ else }}
+          {{- .Summary -}}
+        {{ end }}
+      </p>
+
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="px-5 pb-5">
+    <!-- tags  -->
+
+      {{ with .Params.stack }}
+        <ul class="flex flex-wrap justify-start list-none mb-4 -m-1 pl-0">
+          {{ range . }}
+            <li class="m-1">
+              {{ partial "badges/skill.html" . }}
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
+    <!-- links  -->
+    <ul class="flex flex-wrap justify-start list-none pl-0">
+      {{ with .Params.website }}
+        <li class="m-1">
+          {{ partial "links/website.html" . }}
+        </li>
+      {{ end }}
+
+      {{ with .Params.repo }}
+        <li class="m-1">
+          {{ partial "links/repo.html" . }}
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+
+</div>

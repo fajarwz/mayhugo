@@ -1,0 +1,18 @@
+{{ define "main" }}
+  <div class="container">
+    <h2 class="mb-11">{{ .Name }}</h2>
+      <ul class="flex flex-wrap list-none -m-2 pl-0">
+        {{ range .Pages.ByTitle }}
+          <li class="m-2">
+            <a href="{{ .RelPermalink }}" class="text-slate-900 dark:text-slate-50 hover:no-underline">
+              <span
+                  class="bg-gray-300 font-bold px-4 h-min py-1 rounded-md text-2xl text-slate-900 hover:bg-sky-600 hover:text-white dark:bg-slate-600 dark:text-slate-50 dark:hover:bg-sky-500"
+                >{{ .Title }}</span
+            >
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    {{ partial "paginator.html" . }}
+  </div>
+{{ end }}

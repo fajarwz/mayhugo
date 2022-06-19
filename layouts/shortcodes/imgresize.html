@@ -1,0 +1,2 @@
+{{ $image := (.Page.Resources.GetMatch (.Get 0)).Resize "720x webp" }}
+<img src="{{ $image.RelPermalink }}" class="rounded-md">

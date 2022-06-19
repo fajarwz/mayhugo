@@ -1,0 +1,26 @@
+{{- $paginator := .Paginator }} 
+{{- if gt $paginator.TotalPages 1 }}
+<nav>
+    <ul class="flex gap-4 justify-center items-center list-none">
+        {{- if $paginator.HasPrev }}
+        <li class="text-gray-400 hover:text-slate-900">
+            <a href="{{ $paginator.Prev.URL }}">
+                <i data-feather="chevron-left"></i>
+            </a>
+        </li>
+        {{- end }}
+
+        <li class="font-bold">
+            {{ $paginator.PageNumber }}&nbsp;/&nbsp;{{ $paginator.TotalPages }}
+        </li>
+
+        {{- if $paginator.HasNext -}}
+        <li class="text-gray-400 hover:text-slate-900">
+            <a href="{{ $paginator.Next.URL }}">
+                <i data-feather="chevron-right"></i>
+            </a>
+        </li>
+        {{- end }}
+    </ul>
+</nav>
+{{- end }}

@@ -1,0 +1,65 @@
+{{ $site := .Site }}
+{{ $thumb := "" }}
+<div class="bg-white overflow-hidden rounded-lg shadow-md dark:bg-slate-900 dark:shadow-slate-700">
+
+  <!-- image  -->
+  <div class="overflow-hidden">
+    {{ if isset .Params "featured_image" }}  
+      {{- with .Resources.GetMatch (.Params.featured_image) -}}
+        {{- $thumb = .Resize "x208 webp" -}}
+      {{ end }}
+    {{ else }}
+      {{ with resources.Get ($site.Params.default_image) }}
+        {{ $thumb = .Resize "x208 webp" }}
+      {{ end }}
+    {{ end }}
+
+    <img src="{{- $thumb.RelPermalink -}}" class="h-[13rem] object-cover w-full" alt="{{ .Title }}'s featured image">
+  </div>
+
+  <!-- body  -->
+  <div class="p-5">
+
+    <!-- title  -->
+    <a href="{{ .RelPermalink }}" class="text-slate-900 dark:text-slate-50 hover:no-underline hover:text-sky-600 dark:hover:text-sky-500">
+      <h3>{{ .Title }}</h3>
+    </a>
+
+    <!-- summary  -->
+    <p class="mb-3">
+      {{- if .Truncated -}} 
+        {{- printf "%s%s" .Summary "..." -}} 
+      {{ else }}
+        {{- .Summary -}}
+      {{ end }}
+    </p>
+
+    <!-- published date  -->
+    <div class="mb-3 text-sm">
+      {{ $dateTime := .PublishDate.Format "2006-01-02" }}
+      {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
+      <div class="text-gray-500">
+        Published on <time datetime="{{ $dateTime }}">{{ .PublishDate.Format $dateFormat }}</time>
+      </div>
+    </div>
+
+    <!-- tags  -->
+    <ul class="flex flex-wrap justify-start list-none pl-0">
+      {{ $tags := .Params.tags }} 
+      {{ $all_tags := .Site.Taxonomies.tags }} 
+
+      {{ with $tags }}
+        {{ range $all_tags }}
+          {{ if in $tags .Page.Title }}
+            <li class="m-1">
+              <a href="{{ .Page.Permalink }}">
+                {{ partial "badges/tag.html" .Page.Title }}
+              </a>
+            </li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+
+</div>

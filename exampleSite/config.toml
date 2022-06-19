@@ -1,0 +1,82 @@
+baseURL = "https://example.com/"
+languageCode = 'en-us'
+title = 'MySite' # Site Name
+theme = "mayhugo"
+summaryLength = 20
+# disqusShortname = 'your-disqus-shortname'
+
+DefaultContentLanguage = "en"
+paginate = 15
+
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+canonifyURLs = true
+
+[Taxonomies]
+  tag = 'tags'
+
+[markup.goldmark.renderer]
+  unsafe= true
+
+[params]
+  tagline = "An Enthusiastic Software Developer"
+  site_description = "Web developer | Software Engineer"
+  subtitle_post = "Blog I write. Mostly about web development and software development in general"
+  pp = "images/avatar.png" # hero home image
+  default_image = "images/default-image.jpg" 
+  tags_url = "tags/"
+  ogimage = "images/avatar.png" # site image
+  # brand_image = "images/pp.png" # used in navbar, comment this if you want to use site title
+  favicon = "images/avatar.png" # Path to favicon file
+  gtm_id = "" # Google Tag Manager, fill or comment
+  trakteer = "" # trakteer.id username
+
+[Author]
+  name = "Fajar Windhu Zulfikar"
+  website = "https://example.com"
+  # email = "email@gmail.com"
+  facebook = "username"
+  github = "username"
+  # gitlab = "username"
+  twitter = "username"
+  linkedin = "username"
+  # stackoverflow = "users/XXXXXXX/username"
+  instagram = "username"
+  # youtube = "user/username" # or channel/channelname
+  # paypal = "username"
+  # telegram = "username"
+  # codepen = "username"
+  # slack = "username"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pageref = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Skills"
+    url = "/#skills"
+    weight = 2
+  [[menu.main]]
+    name = "Projects"
+    url = "/#projects"
+    weight = 3
+  [[menu.main]]
+    name = "Blog"
+    pageref = "/blog/"
+    weight = 4
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineAnchors = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4

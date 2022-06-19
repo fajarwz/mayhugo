@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html id="html" lang="{{ .Site.LanguageCode }}">
+    <head>
+        {{- partial "head-script.html" . -}}
+        {{- partial "meta.html" . -}}
+        {{- partial "links.html" . -}}
+    </head>
+    <body id="body" class="grid grid-col content-between min-h-screen no-transition">
+        {{- partial "gtm-noscript.html" . -}}
+        {{- partial "header.html" . -}}
+        <main>
+        {{- block "main" . }}{{- end }}
+        </main>
+        {{- partial "footer.html" . -}}
+        {{- partial "script.html" . -}}
+    </body>
+</html>

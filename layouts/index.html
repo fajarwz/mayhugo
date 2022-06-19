@@ -1,0 +1,91 @@
+{{ define "main" }}
+<section class="pt-7 min-h-[calc(100vh-128px)]">
+  {{ $site := .Site }}
+  <div class="container max-w-3xl">
+    <div class="mb-11">
+      {{ if isset $site.Params "pp" }}
+        {{ with resources.Get ($site.Params.pp) }}
+            {{ $brand := .Resize "x192 webp" }}
+            <img src="{{ $brand.Permalink }}" class="mx-auto rounded-full w-48 h-48" alt="{{ $site.Title }}'s photo">
+        {{ end }}
+      {{ else }}
+          <h1 class="mb-0">{{ $site.Title }}</h1>
+      {{ end }}
+    </div>
+    <div>
+      <p class="text-center mb-3">Hi, I'm</p>
+      <p href="{{ if isset .Site.Author "website" }} {{- .Site.Author.website -}} {{ else }} {{- "#" -}} {{ end }}" target="_blank">
+        <h2 class="text-center">{{ .Site.Author.name }}</h2>
+      </p>
+      <div class="mb-11 text-center">{{ .Site.Params.tagline }}</div>
+    </div>
+    
+    {{ partial "socials.html" . }}
+  </div>
+</section>
+<section id="skills" class="py-16 min-h-min">
+  <div class="container max-w-3xl">
+    <div class="mb-6">
+      <h2 class="text-center">Skills</h2>
+      <p class="text-center">Technologies i use</p>
+    </div>
+    <div>
+      <ul class="flex flex-wrap justify-center list-none pl-0">
+        {{ range .Site.Data.skills.skill }}
+          <li class="m-2">
+            {{ partial "badges/skill.html" . }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</section>
+<section id="projects" class="py-16 min-h-min">
+  <div class="container">
+    <div class="mb-6">
+      <h2 class="text-center">Projects</h2>
+      <p class="text-center">Projects I have worked on and am currently working on</p>
+    </div>
+
+    {{ with .Site.GetPage "section" "projects" }}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        {{ range .Pages.ByDate.Reverse }}
+          {{ partial "cards/project.html" . }}
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="text-center">
+        <em>Currently no project yet</em>
+      </div>
+    {{ end }}
+
+  </div>
+</section>
+<section class="py-16 min-h-min">
+  <div class="container">
+    <div class="mb-6">
+      <h2 class="text-center">Latest Posts</h2>
+      <p class="text-center">{{ .Site.Params.subtitle_post }}</p>
+    </div>
+
+    {{ with .Site.GetPage "section" "blog" }}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        {{ range first 3 .Pages.ByPublishDate.Reverse }}
+          {{ partial "cards/post.html" . }}
+        {{ end }}
+      </div>
+      <div class="font-bold text-center">
+        <a href="{{ "/blog" | relURL }}" class="dark:text-sky-500">
+          <span>More</span>&nbsp;<i class="inline-block" data-feather="chevrons-right"></i>
+        </a>
+      </div>
+    {{ else }}
+      <div class="text-center">
+        <em>Currently no post yet</em>
+      </div>
+    {{ end }}
+    
+  </div>
+</section>
+
+{{ end }}

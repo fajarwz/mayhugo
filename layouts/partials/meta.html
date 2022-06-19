@@ -1,0 +1,61 @@
+{{ $site := .Site }}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{{ $title := print .Title " | " .Site.Title }}
+{{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+
+<meta property="og:title" content="{{ $title }}" />
+<meta name="twitter:title" content="{{ $title }}" />
+<meta itemprop="name" content="{{ $title }}" />
+<meta name="application-name" content="{{ $title }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
+
+{{ $meta_description := .Site.Params.site_description }}
+{{ if .Summary }}
+  {{ $meta_description = .Summary }}
+{{ end }}
+
+<meta name="description" content="{{ $meta_description }}" />
+<meta itemprop="description" content="{{ $meta_description }}" />
+<meta property="og:description" content="{{ $meta_description }}" />
+<meta name="twitter:description" content="{{ $meta_description }}" />
+
+<base href="{{ .Permalink }}">
+<meta name="url" content="{{ .Permalink }}" />
+<meta name="twitter:url" content="{{ .Permalink }}" /> 
+<meta property="og:url" content="{{ .Permalink }}" />
+
+{{ $ogimage := "" }}
+{{- with .Resources.GetMatch (.Params.featured_image) -}} 
+  {{- $ogimage = .Fill "1200x630 jpg" -}}
+{{ else }}
+  {{ with resources.Get ($site.Params.ogimage) }}
+    {{ $ogimage = .Fill "1200x630 jpg" }}
+  {{ end }}
+{{ end }}
+
+{{ $ogimagewa := "" }}
+{{- with .Resources.GetMatch (.Params.featured_image) -}} 
+  {{- $ogimagewa = .Fill "400x400 jpg" -}}
+{{ else }}
+  {{ with resources.Get ($site.Params.ogimage) }}
+    {{ $ogimagewa = .Fill "400x400 jpg" }}
+  {{ end }}
+{{ end }}
+
+<meta itemprop="image" content="{{ $ogimage.Permalink }}" />
+<meta property="og:image" itemprop="image" content="{{ $ogimage.Permalink }}" /> 
+<meta property="og:image:type" content="image/jpg" />
+<meta property="og:image" itemprop="image" content="{{ $ogimagewa.Permalink }}" /> 
+<meta property="og:image:type" content="image/jpg" />
+<meta name="twitter:image" content="{{ $ogimage.Permalink }}" />
+<meta name="twitter:image:src" content="{{ $ogimage.Permalink }}" /> 
+
+<meta property="og:type" content="website" />
+
+<meta name="robots" content="index,follow" /> 
+<meta name="googlebot" content="index,follow" />
+
+<title>{{ $title }}</title>
