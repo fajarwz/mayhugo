@@ -81,5 +81,8 @@ hugo server
 ```
 You can go to your website by typing this in your browser [`localhost:1313`](http://localhost:1313/)
 
+## Showcase
+If you use Mayhugo as your Hugo site theme, please tell me in [this discussion](https://github.com/fajarwz/mayhugo/discussions/2#discussion-4159428). Thank you!
+
 ## Author
 - Developed by [fajarwz](https://fajarwz.com).
