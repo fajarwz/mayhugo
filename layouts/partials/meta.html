@@ -4,7 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 {{ $title := print .Title " | " .Site.Title }}
-{{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+{{ if eq .Title "Blog" }}{{ $title = printf "%s%s%s" .Site.Params.blog_tagline " | " .Site.Title }}{{ end }}
+{{ if .IsHome }}{{ $title = printf "%s%s%s" .Site.Title " | " .Site.Params.site_description }}{{ end }}
 
 <meta property="og:title" content="{{ $title }}" />
 <meta name="twitter:title" content="{{ $title }}" />
@@ -21,6 +22,8 @@
 <meta itemprop="description" content="{{ $meta_description }}" />
 <meta property="og:description" content="{{ $meta_description }}" />
 <meta name="twitter:description" content="{{ $meta_description }}" />
+
+<meta name="keywords" content="{{ .Site.Params.keywords }}">
 
 <base href="{{ .Permalink }}">
 <meta name="url" content="{{ .Permalink }}" />

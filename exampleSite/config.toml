@@ -22,7 +22,9 @@ canonifyURLs = true
 [params]
   tagline = "An Enthusiastic Software Developer"
   site_description = "Web developer | Software Engineer"
+  blog_tagline = "Articles about web development, software development, life advice"
   subtitle_post = "Blog I write. Mostly about web development and software development in general"
+  keywords = "my keywords"
   pp = "images/avatar.png" # hero home image
   default_image = "images/default-image.jpg" 
   tags_url = "tags/"
