@@ -22,7 +22,6 @@ hugo new site your-site-name
 **Step 5:** Add this repository as your submodule project. Type this inside `/themes`
 
 ```
-git init
 git submodule add https://github.com/fajarwz/mayhugo.git 
 ```
 
