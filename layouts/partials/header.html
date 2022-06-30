@@ -6,7 +6,7 @@
         <div
             class="flex flex-col lg:flex-row {{ if not .IsHome }} lg:justify-between {{ else }} lg:justify-center {{ end }} lg:items-center"
         >
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-row items-center justify-between">
                 {{ if not .IsHome }}
                     {{ if isset $site.Params "brand_image" }}
                         {{ with resources.Get ($site.Params.brand_image) }}
