@@ -45,7 +45,7 @@
       <div class="mb-11">
         <div class="mb-4">
           <h2 class="font-bold mr-2">Share</h2>
-          <ul class="flex flex-wrap list-none -m-2 pl-0">
+          <ul class="flex flex-wrap items-center list-none -m-2 pl-0">
             <li class="m-2">
               <a href="{{ printf "%s%s%s" "https://www.facebook.com/sharer/sharer.php?u=" .Permalink "?utm_source=facebook&utm_medium=social&utm_campaign=user-share" }}" 
                 class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
@@ -57,6 +57,7 @@
             <li class="m-2">
               <a href="{{ printf "%s%s%s%s" "https://twitter.com/intent/tweet?text=" .Title " " .Permalink "?utm_source=twitter&utm_medium=social&utm_campaign=user-share" }}" 
                 class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                title="Share to Facebook"
                 target="_blank"
               >
                 <i data-feather="twitter"></i>
@@ -65,10 +66,29 @@
             <li class="m-2">
               <a href="{{ printf "%s%s%s%s%s" "https://www.linkedin.com/shareArticle?mini=true&url=" .Permalink "&title=" .Title "?utm_source=linkedin&utm_medium=social&utm_campaign=user-share" }}" 
                 class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                title="Share to LinkedIn"
                 target="_blank"
               >
                 <i data-feather="linkedin"></i>
               </a>
+            </li>
+            </li>
+            <li class="flex flex-row items-center m-2">
+              <input type="text" 
+                id="post-link"
+                class="hidden"
+                value="{{ printf "%s%s" .Permalink "?utm_source=link&utm_medium=link&utm_campaign=user-share" }}" 
+              >
+              <a href="javascript:;" 
+                id="copy-link"
+                class="mr-2 text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                title="Copy link"
+              >
+                <i data-feather="link"></i>
+              </a>
+              <div>
+                <span id="link-copied-notif" class="bg-green-500 hidden p-1 rounded text-sm">Link copied</span>
+              </div>
             </li>
           </ul>
         </div>

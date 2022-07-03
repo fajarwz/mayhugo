@@ -121,6 +121,24 @@ function transitionAfterPageLoad() {
         .addEventListener("click", function () {
             toggleDarkMode();
         });
+
+    document
+        .getElementById("copy-link")
+        .addEventListener("click", function () {
+            const copyText = document.getElementById("post-link");
+            
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+
+            document.getElementById("link-copied-notif").classList.remove("hidden")
+            document.getElementById("link-copied-notif").classList.add("block")
+
+            setTimeout(function() {
+                document.getElementById("link-copied-notif").classList.remove("block")
+                document.getElementById("link-copied-notif").classList.add("hidden")
+            }, 3000)
+        });
 })()
 
 window.onscroll = function() {navbarShrink()};
