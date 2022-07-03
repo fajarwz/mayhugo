@@ -12,15 +12,20 @@
         </div>
       </div>
 
-      {{ with .Params.tags }}
+      {{ $tags := .Params.tags }} 
+      {{ $all_tags := .Site.Taxonomies.tags }} 
+
+      {{ with $tags }}
         <ul class="flex flex-wrap justify-start list-none mb-11 -mx-1 pl-0">
 
-          {{ range . }}
-          <li class="m-1">
-            <a href="{{ printf "%s%s%s" $site.BaseURL $site.Params.tags_url . }}">
-              {{ partial "badges/tag.html" . }}
-            </a>
-          </li>
+          {{ range $all_tags }}
+            {{ if in $tags .Page.Title }}
+            <li class="m-1">
+              <a href="{{ .Page.Permalink }}">
+                {{ partial "badges/tag.html" .Page.Title }}
+              </a>
+            </li>
+            {{ end }}
           {{ end }}
 
         </ul>
