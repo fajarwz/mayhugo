@@ -1,0 +1,2 @@
+{{ $image := (.Page.Resources.GetMatch (.Get 0)) }}
+<img src="{{ $image.RelPermalink }}" class="mb-4 rounded-md">
