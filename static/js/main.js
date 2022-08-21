@@ -67,7 +67,7 @@ function navbarShrink() {
     const header = document.getElementById("header");
     const nav = document.getElementById("nav");
 
-    if (document.body.scrollTop > 120 || document.documentElement.scrollTop > 120) {
+    if (document.documentElement.scrollTop > 200) {
         nav.classList.add("my-1");
 
         if (document.getElementById("brand-title") !== null)
@@ -80,7 +80,7 @@ function navbarShrink() {
             header.classList.remove("bg-sky-50");
             header.classList.add("bg-sky-100");
         }
-    } else {
+    } else if (document.documentElement.scrollTop < 1) {
         nav.classList.remove("my-1");
 
         if (document.getElementById("brand-title") !== null)
