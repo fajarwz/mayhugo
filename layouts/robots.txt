@@ -1,0 +1,4 @@
+User-agent: Googlebot
+Disallow: /404
+
+Sitemap: https://fajarwz.com/sitemap.xml
