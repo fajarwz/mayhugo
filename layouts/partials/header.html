@@ -11,7 +11,7 @@
                     {{ if isset $site.Params "brand_image" }}
                         {{ with resources.Get ($site.Params.brand_image) }}
                             {{ $brand := .Resize "x58 webp" }}
-                            <img src="{{ $brand.Permalink }}" alt="{{ $site.Title }}">
+                            <img data-src="{{ $brand.Permalink }}" class="lozad" alt="{{ $site.Title }}">
                         {{ end }}
                     {{ else }}
                         <h1 id="brand-title" class="mb-0 transition-all">{{ $site.Title }}</h1>

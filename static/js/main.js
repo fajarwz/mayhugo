@@ -55,6 +55,7 @@ function headingLink() {
         const link = document.createElement('a');
 
         link.setAttribute('href', `#${element.id}`);
+        link.setAttribute('aria-label', `Link to ${element.innerText}`);
         link.setAttribute('style', 'margin-left: -1.5rem; margin-right: 0.5rem; color: rgb(56, 189, 248); display:inline-block;');
         link.innerHTML = '<i data-feather="link" style="width: 1rem; height: 1rem"></i>';
         element.insertBefore(link, element.firstChild);
@@ -121,6 +122,9 @@ function transitionAfterPageLoad() {
         .addEventListener("click", function () {
             toggleDarkMode();
         });
+
+    const observer = window.lozad();
+    observer.observe();
 })()
 
 window.onscroll = function() {navbarShrink()};

@@ -34,11 +34,11 @@
       <div class="h-min mb-5 overflow-hidden rounded-2xl">
         {{ with .Resources.GetMatch (.Params.featured_image) }}
           {{ $thumb := .Resize "720x webp" }}
-          <img src="{{ $thumb.Permalink }}" class="w-full" alt="{{ .Title }}">
+          <img data-src="{{ $thumb.Permalink }}" class="lozad w-full" alt="{{ .Title }}">
         {{ else }}
           {{ with resources.Get ($site.Params.default_image) }}
             {{ $thumb := .Resize "720x webp" }}
-            <img src="{{ $thumb.Permalink }}" class="object-cover w-full" alt="{{ .Title }}">
+            <img data-src="{{ $thumb.Permalink }}" class="lozad object-cover w-full" alt="{{ .Title }}">
           {{ end }}
         {{ end }}
       </div>
