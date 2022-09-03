@@ -19,7 +19,7 @@
       <h3>{{ .Title }}</h3>
 
       <!-- summary  -->
-      <p class="mb-3">
+      <p class="mb-0">
         {{- if .Truncated -}} 
           {{- printf "%s%s" .Summary "..." -}} 
         {{ else }}
@@ -45,15 +45,15 @@
       {{ end }}
 
     <!-- links  -->
-    <ul class="flex flex-wrap justify-start list-none pl-0">
+    <ul class="flex flex-row justify-start list-none mb-0 pl-0">
       {{ with .Params.website }}
-        <li class="m-1">
+        <li class="m-1 h-5">
           {{ partial "links/website.html" . }}
         </li>
       {{ end }}
 
       {{ with .Params.repo }}
-        <li class="m-1">
+        <li class="m-1 h-5">
           {{ partial "links/repo.html" . }}
         </li>
       {{ end }}
