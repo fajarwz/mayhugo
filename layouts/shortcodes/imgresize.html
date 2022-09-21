@@ -1,2 +1,5 @@
-{{ $image := (.Page.Resources.GetMatch (.Get 0)).Resize "720x webp" }}
-<img data-src="{{ $image.RelPermalink }}" class="h-auto lozad mb-4 rounded-md w-[792px]">
+{{ $image := (.Page.Resources.GetMatch (.Get 0)) }}
+{{ $resizedImage := $image.Resize "720x webp" }}
+<a href="{{ $image.RelPermalink }}" target="_blank">
+  <img data-src="{{ $resizedImage.RelPermalink }}" class="h-auto lozad mb-4 rounded-md w-[792px]">
+</a>
