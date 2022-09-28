@@ -1,55 +1,48 @@
-<header id="header" class="bg-sky-50 dark:bg-slate-800 sticky transition-all top-0">
-    <div>
-        {{ $site := .Site }}
-    </div>
-
-    <nav id="nav" class="container my-6 transition-all">
-        <div
-            class="flex flex-col lg:flex-row {{ if not .IsHome }} lg:justify-between {{ else }} lg:justify-center {{ end }} lg:items-center"
-        >
-            <div class="flex flex-row items-center justify-between">
-                {{ if not .IsHome }}
-                    {{ if isset $site.Params "brand_image" }}
-                        {{ with resources.Get ($site.Params.brand_image) }}
-                            {{ $brand := .Resize "x58 webp" }}
-                            <img data-src="{{ $brand.Permalink }}" class="lozad" alt="{{ $site.Title }}">
-                        {{ end }}
-                    {{ else }}
-                        <h1 id="brand-title" class="mb-0 transition-all">{{ $site.Title }}</h1>
+{{ $site := .Site }}
+<nav id="nav" class="py-6 bg-sky-50 dark:bg-slate-800 transition-all top-0">
+    <div class="container flex flex-col lg:flex-row {{ if not .IsHome }} lg:justify-between {{ else }} lg:justify-center {{ end }} lg:items-center">
+        <div class="flex flex-row items-center justify-between">
+            {{ if not .IsHome }}
+                {{ if isset $site.Params "brand_image" }}
+                    {{ with resources.Get ($site.Params.brand_image) }}
+                        {{ $brand := .Resize "x58 webp" }}
+                        <img data-src="{{ $brand.Permalink }}" class="lozad" alt="{{ $site.Title }}">
                     {{ end }}
-                    
+                {{ else }}
+                    <h1 id="brand-title" class="mb-0 transition-all">{{ $site.Title }}</h1>
                 {{ end }}
-                <a href="javascript:;" id="hamburger-btn" class="lg:hidden">
-                    <i data-feather="menu" class="h-14"></i>
-                </a>
-            </div>
-            <div
-                id="nav-link"
-                class="bg-sky-100 hidden flex-col gap-4 mb-4 p-6 rounded-md lg:flex lg:rounded-none lg:p-0 lg:bg-opacity-0 lg:mb-0 lg:flex-row lg:items-center lg:gap-12 dark:bg-slate-900 dark:lg:bg-transparent"
-            >
-                {{ range .Site.Menus.main }}
-                <a
-                    class="text-slate-900 transition-all dark:text-slate-50 flex items-center h-10 font-bold hover:no-underline hover:text-sky-600 dark:hover:text-sky-500"
-                    href="{{ .URL }}"
-                >
-                    <span class="my-auto">{{ print .Name | safeHTML }}</span>
-                </a>
-                {{ end }}
-                <a
-                    id="dark-mode-toggler"
-                    title="Toggle dark mode"
-                    class="text-slate-900 dark:text-slate-50 flex items-center h-10 font-bold hover:no-underline hover:text-sky-600 dark:hover:text-sky-500"
-                    href="javascript:;"
-                >
-                    <span class="my-auto">
-                        <i
-                            id="dark-mode-toggler-sun"
-                            data-feather="sun"
-                        ></i>
-                        <i id="dark-mode-toggler-moon" data-feather="moon"></i>
-                    </span>
-                </a>
-            </div>
+                
+            {{ end }}
+            <a href="javascript:;" id="hamburger-btn" class="lg:hidden">
+                <i data-feather="menu" class="h-14"></i>
+            </a>
         </div>
-    </nav>
-</header>
+        <div
+            id="nav-link"
+            class="bg-sky-100 hidden flex-col gap-4 mb-4 p-6 rounded-md lg:flex lg:rounded-none lg:p-0 lg:bg-opacity-0 lg:mb-0 lg:flex-row lg:items-center lg:gap-12 dark:bg-slate-900 dark:lg:bg-transparent"
+        >
+            {{ range .Site.Menus.main }}
+            <a
+                class="text-slate-900 transition-all dark:text-slate-50 flex items-center h-10 font-bold hover:no-underline hover:text-sky-600 dark:hover:text-sky-500"
+                href="{{ .URL }}"
+            >
+                <span class="my-auto">{{ print .Name | safeHTML }}</span>
+            </a>
+            {{ end }}
+            <a
+                id="dark-mode-toggler"
+                title="Toggle dark mode"
+                class="text-slate-900 dark:text-slate-50 flex items-center h-10 font-bold hover:no-underline hover:text-sky-600 dark:hover:text-sky-500"
+                href="javascript:;"
+            >
+                <span class="my-auto">
+                    <i
+                        id="dark-mode-toggler-sun"
+                        data-feather="sun"
+                    ></i>
+                    <i id="dark-mode-toggler-moon" data-feather="moon"></i>
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>

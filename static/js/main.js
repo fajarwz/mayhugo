@@ -65,34 +65,38 @@ function headingLink() {
 }
 
 function navbarShrink() {
-    const header = document.getElementById("header");
+    // const header = document.getElementById("header");
     const nav = document.getElementById("nav");
 
     if (document.documentElement.scrollTop > 200) {
-        nav.classList.add("my-1");
+        nav.classList.add("sticky");
+        nav.classList.remove("py-6");
+        nav.classList.add("py-1");
 
         if (document.getElementById("brand-title") !== null)
             document.getElementById("brand-title").classList.add("text-3xl");
 
         if (localStorage.getItem("theme") === "dark") {
-            header.classList.remove("dark:bg-slate-800");
-            header.classList.add("dark:bg-slate-900");
+            nav.classList.remove("dark:bg-slate-800");
+            nav.classList.add("dark:bg-slate-900");
         } else {
-            header.classList.remove("bg-sky-50");
-            header.classList.add("bg-sky-100");
+            nav.classList.remove("bg-sky-50");
+            nav.classList.add("bg-sky-100");
         }
     } else if (document.documentElement.scrollTop < 1) {
-        nav.classList.remove("my-1");
+        nav.classList.remove("sticky");
+        nav.classList.add("py-6");
+        nav.classList.remove("py-1");
 
         if (document.getElementById("brand-title") !== null)
             document.getElementById("brand-title").classList.remove("text-3xl");
 
         if (localStorage.getItem("theme") === "dark") {
-            header.classList.add("dark:bg-slate-800");
-            header.classList.remove("dark:bg-slate-900");
+            nav.classList.add("dark:bg-slate-800");
+            nav.classList.remove("dark:bg-slate-900");
         } else {
-            header.classList.add("bg-sky-50");
-            header.classList.remove("bg-sky-100");
+            nav.classList.add("bg-sky-50");
+            nav.classList.remove("bg-sky-100");
         }
     }
 }
