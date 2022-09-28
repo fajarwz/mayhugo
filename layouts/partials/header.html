@@ -1,8 +1,9 @@
 <header id="header" class="bg-sky-50 dark:bg-slate-800 sticky transition-all top-0">
-    <div class="container">
+    <div>
         {{ $site := .Site }}
+    </div>
 
-    <nav id="nav" class="my-6 transition-all">
+    <nav id="nav" class="container my-6 transition-all">
         <div
             class="flex flex-col lg:flex-row {{ if not .IsHome }} lg:justify-between {{ else }} lg:justify-center {{ end }} lg:items-center"
         >
@@ -51,5 +52,4 @@
             </div>
         </div>
     </nav>
-    </div>
 </header>
