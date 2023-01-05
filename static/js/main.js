@@ -105,6 +105,109 @@ function transitionAfterPageLoad() {
     document.getElementById("body").classList.remove("no-transition");
 }
 
+function displayResults (results, store) {
+    const searchResults = document.getElementById('results')
+    if (results.length) {
+      let resultList = ''
+      // Iterate and build result list elements
+      for (const n in results) {
+        const item = store[results[n].ref]
+        resultList += `
+        <div class="bg-white overflow-hidden rounded-lg shadow-md dark:bg-slate-900 dark:shadow-slate-700">
+  
+          <!-- image -->
+          <div class="overflow-hidden">
+            <img data-src="${item.image}" class="h-[13rem] lozad object-cover w-full" alt="${item.title}'s featured image">
+          </div>
+  
+          <!-- body  -->
+          <div class="p-5">
+  
+            <!-- title  -->
+            <a href="${item.url}" class="text-slate-900 dark:text-slate-50 hover:no-underline hover:text-sky-600 dark:hover:text-sky-500">
+              <h3>${item.title}</h3>
+            </a>
+  
+            <!-- summary  -->
+            <p class="mb-3">
+              ${item.summary}
+            </p>
+  
+            <!-- published date  -->
+            <div class="mb-3 text-sm">
+              <div class="text-gray-500">
+                Published on <time datetime="${item.publishedOnDate}">${item.publishedOnDateWithFormat}</time>
+              </div>
+            </div>
+  
+            <!-- tags  -->
+            <ul class="flex flex-wrap justify-start list-none pl-0">
+              ${(function() {
+                let html = '';
+  
+                for(let i = 0; i < item.tagName.length; i++){
+                  html += 
+                  `<li class="m-1">
+                    <a href="${item.tagUrl[i]}">
+                      <span
+                        class="bg-gray-300 px-4 h-min py-1 rounded-md text-sm text-slate-900 
+                        hover:bg-sky-600 hover:text-white dark:bg-slate-600 
+                        dark:text-slate-50 dark:hover:bg-sky-500"
+                      >${item.tagName[i]}</span>
+                    </a>
+                  </li>`;
+                } 
+  
+                return html;
+              })()}
+            </ul>
+          </div>
+  
+        </div>`;
+      }
+      searchResults.innerHTML = resultList
+    } else {
+      searchResults.innerHTML = 'No results found.'
+    }
+}
+  
+// Get the query parameter(s)
+const params = new URLSearchParams(window.location.search)
+const query = params.get('query')
+
+// Perform a search if there is a query
+if (query) {
+    // Retain the search input in the form when displaying results
+    document.getElementById('search-input').setAttribute('value', query)
+
+    const idx = lunr(function () {
+        this.ref('id')
+        this.field('title', {
+        boost: 15
+        })
+        this.field('tags')
+        this.field('content', {
+        boost: 10
+        })
+
+        for (const key in window.store) {
+        this.add({
+            id: key,
+            title: window.store[key].title,
+            tags: window.store[key].category,
+            content: window.store[key].content
+        })
+        }
+    })
+
+    // Perform the search
+    const results = idx.search(query)
+    // Update the list with results
+    displayResults(results, window.store)
+
+    document.getElementById('search-title').innerText = 'Search Results for ' + query
+}
+
 (function() {
     transitionAfterPageLoad();
     feather.replace();

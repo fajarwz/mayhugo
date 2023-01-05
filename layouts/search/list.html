@@ -1,0 +1,16 @@
+{{ define "main" }}
+  <div class="container">
+    <div class="flex flex-col sm:flex-row mb-11 justify-between">
+      <h2 id="search-title">
+        {{ .Name }} 
+      </h2>
+      <div class="mb-4">
+        {{ partial "search-form.html" . }}
+      </div>
+    </div>
+    <div id="results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      Search results would be here.
+    </div>
+  </div>
+  {{ partial "search-index.html" . }}
+{{ end }}

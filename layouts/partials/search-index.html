@@ -1,0 +1,57 @@
+{{ $site := .Site }}
+{{ $all_tags := .Site.Taxonomies.tags }} 
+<script>
+window.store = {
+    // You can specify your blog section only:
+    {{ range where $site.Pages "Section" "blog" }}
+    // For all pages in your site, use "range .Site.Pages"
+    // You can use any unique identifier here
+    {{ $thumb := "" }}
+    {{ if isset .Params "featured_image" }}  
+      {{- with .Resources.GetMatch (.Params.featured_image) -}}
+        {{- $thumb = .Resize "x208 webp" -}}
+      {{ end }}
+    {{ else }}
+      {{ with resources.Get ($site.Params.default_image) }}
+        {{ $thumb = .Resize "x208 webp" }}
+      {{ end }}
+    {{ end }}
+
+    {{ $summary := "" }}
+    {{- if .Truncated -}} 
+      {{- $summary = printf "%s%s" .Summary "..." -}} 
+    {{ else }}
+      {{- $summary = .Summary -}}
+    {{ end }}
+
+    {{ $dateTime := .PublishDate.Format "2006-01-02" }}
+    {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
+
+    {{ $tags := .Params.tags }} 
+    {{ $tagName := slice }} 
+    {{ $tagUrl := slice }} 
+
+    {{ with $tags }}
+      {{ range $all_tags }}
+        {{ if in $tags .Page.Title }}
+          {{ $tagName = $tagName | append .Page.Title }}
+          {{ $tagUrl = $tagUrl | append .Page.Permalink }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    "{{ .Permalink }}": {
+        // You can customize your searchable fields using any .Page parameters
+        "title": "{{- .Title -}}",
+        "image" :{{- $thumb.RelPermalink -}},
+        "summary" :{{- $summary -}},
+        "content": {{- .Content | plainify -}},
+        "publishedOnDate": {{- $dateTime -}}, 
+        "publishedOnDateWithFormat": {{- .PublishDate.Format $dateFormat -}},
+        "url": "{{- .Permalink -}}",
+        "tagName": {{- $tagName -}},
+        "tagUrl": {{- $tagUrl -}},
+    },
+    {{ end }}
+}
+</script>

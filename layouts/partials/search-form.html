@@ -1,0 +1,6 @@
+<form id="search"
+    action='{{ with .GetPage "/search" }}{{.Permalink}}{{end}}' method="get" class="mt-0 sm:mt-2">
+    <label hidden for="search-input">Search site</label>
+    <input type="text" id="search-input" name="query" placeholder="🔍 Type here to search"
+        class="dark:bg-slate-900 px-3 py-1.5 rounded-lg w-full sm:w-64">
+</form>
