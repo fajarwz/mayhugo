@@ -3,6 +3,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<meta name="twitter:card" content="summary_large_image">
+{{ if isset .Site.Author "twitter" }}
+<meta name="twitter:site" content="{{ printf "%s%s" "@" .Site.Author.twitter }}">
+<meta name="twitter:creator" content="{{ printf "%s%s" "@" .Site.Author.twitter }}">
+{{ end }}
+
 {{ $title := print .Title " | " .Site.Title }}
 {{ if eq .Title "Blog" }}{{ $title = printf "%s%s%s" .Site.Params.blog_tagline " | " .Site.Title }}{{ end }}
 {{ if .IsHome }}{{ $title = printf "%s%s%s" .Site.Title " | " .Site.Params.site_description }}{{ end }}
