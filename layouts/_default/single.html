@@ -105,6 +105,10 @@
           </div>
         {{ end }}
 
+        {{ if .Site.Params.mailchimp_url }}
+          {{ partial "partials/mailchimp-email.html" . }}
+        {{ end }}
+
         {{ if .Params.comments }}
           <div>
             <h2>Comments</h2>
