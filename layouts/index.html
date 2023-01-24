@@ -23,6 +23,7 @@
     {{ partial "socials.html" . }}
   </div>
 </section>
+{{ if .Site.Params.skills_enable }}
 <section id="skills" class="py-16 min-h-min">
   <div class="container max-w-3xl">
     <div class="mb-6">
@@ -40,6 +41,8 @@
     </div>
   </div>
 </section>
+{{ end }}
+{{ if .Site.Params.projects_enable }}
 <section id="projects" class="py-16 min-h-min">
   <div class="container">
     <div class="mb-6">
@@ -61,6 +64,7 @@
 
   </div>
 </section>
+{{ end }}
 <section class="py-16 min-h-min">
   <div class="container">
     <div class="mb-6">

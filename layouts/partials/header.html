@@ -9,7 +9,7 @@
                         <img data-src="{{ $brand.Permalink }}" class="lozad" alt="{{ $site.Title }}">
                     {{ end }}
                 {{ else }}
-                    <h1 id="brand-title" class="mb-0 transition-all">{{ $site.Title }}</h1>
+                    <a href="{{ .Site.BaseURL }}" class="no-underline hover:no-underline text-slate-900 dark:text-slate-50"><h1 id="brand-title" class="mb-0 transition-all">{{ $site.Title }}</h1></a>
                 {{ end }}
                 
             {{ end }}

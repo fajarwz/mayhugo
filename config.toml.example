@@ -1,0 +1,90 @@
+baseURL = "https://fajarwz.com/"
+languageCode = 'en-us'
+title = 'Fajarwz' # Site Name
+theme = "mayhugo"
+summaryLength = 20
+disqusShortname = 'fajarwz'
+# disqusShortname = 'your-disqus-shortname'
+
+DefaultContentLanguage = "en"
+paginate = 15
+
+enableEmoji = true
+enableGitInfo = true
+enableRobotsTXT = true
+canonifyURLs = true
+
+[Taxonomies]
+  tag = 'tags'
+
+[markup.goldmark.renderer]
+  unsafe= true
+
+[params]
+  tagline = "An Enthusiastic Software Developer"
+  site_description = "Web developer | Software Engineer"
+  blog_tagline = "Articles about web development, software development, life advice"
+  subtitle_post = "Blog I write. Mostly about web development and remote working"
+  # skills_enable = true
+  # projects_enable = true
+  keywords = "fajarwz, fajarwz web, fajar, fajar windhu, fajar windhu zulfikar, fajarwz.com, web developer, software developer, software engineer, web service, web purwakarta, purwakarta, fullstack"
+  pp = "images/pp.png" # hero home image
+  default_image = "images/default-image.jpg" 
+  tags_url = "tags/"
+  ogimage = "images/pp.png" # site image
+  # brand_image = "images/pp.png" # used in navbar, comment this if you want to use site title
+  favicon = "images/pp.png" # Path to favicon file
+  # gtm_id = "" # Google Tag Manager, fill or comment
+  trakteer = "fajarwz" # trakteer.id username
+  # mailchimp_url = "" # mailchimp
+  mailchimp_detect_page = true # subscribe in what page
+  mailchimp_copywriting = "Sign up for my email newsletter and never miss a beat in the world of web development. Stay up-to-date on the latest trends, techniques, and tools. Don't miss out on valuable insights. Subscribe now!"
+
+[Author]
+  name = "Fajar Windhu Zulfikar"
+  website = "https://fajarwz.com"
+  # email = "email@gmail.com"
+  facebook = "fajarwz123"
+  github = "fajarwz"
+  # gitlab = "username"
+  twitter = "fajarwz"
+  linkedin = "fajarwz"
+  # stackoverflow = "users/XXXXXXX/username"
+  instagram = "fajarwz"
+  # youtube = "user/username" # or channel/channelname
+  # paypal = "username"
+  # telegram = "username"
+  # codepen = "username"
+  # slack = "username"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pageref = "/"
+    weight = 1
+  [[menu.main]]
+    name = "Skills"
+    url = "/#skills"
+    weight = 2
+  [[menu.main]]
+    name = "Projects"
+    url = "/#projects"
+    weight = 3
+  [[menu.main]]
+    name = "Blog"
+    pageref = "/blog/"
+    weight = 4
+
+[markup]
+  [markup.highlight]
+    anchorLineNos = false
+    codeFences = true
+    guessSyntax = true
+    hl_Lines = ""
+    lineAnchors = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
