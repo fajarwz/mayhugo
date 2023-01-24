@@ -2,9 +2,10 @@
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 tags: 
-    - Go
-    - Hugo
-# featured_image : ""
+- Go
+- Hugo
+# summary: ""
+# featured_image : "featured-image.png"
 draft: false 
 comments: true # enable or disable comments for spesific page
 # publishdate: {{ .Date }} # for scheduling post
