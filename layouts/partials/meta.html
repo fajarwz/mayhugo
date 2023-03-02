@@ -47,22 +47,24 @@
 
 {{ $ogimagewa := "" }}
 {{- with .Resources.GetMatch (.Params.featured_image) -}} 
-  {{- $ogimagewa = .Fill "400x400 jpg" -}}
+  {{- $ogimagewa = .Fill "256x256 jpg" -}}
 {{ else }}
   {{ with resources.Get ($site.Params.ogimage) }}
-    {{ $ogimagewa = .Fill "400x400 jpg" }}
+    {{ $ogimagewa = .Fill "256x256 jpg" }}
   {{ end }}
 {{ end }}
 
 <meta itemprop="image" content="{{ $ogimage.Permalink }}" />
 <meta property="og:image" itemprop="image" content="{{ $ogimage.Permalink }}" /> 
 <meta property="og:image:type" content="image/jpg" />
-<meta property="og:image" itemprop="image" content="{{ $ogimagewa.Permalink }}" /> 
+<meta property="og:image:secure_url" itemprop="image" content="{{ $ogimagewa.Permalink }}" /> 
 <meta property="og:image:type" content="image/jpg" />
 <meta name="twitter:image" content="{{ $ogimage.Permalink }}" />
 <meta name="twitter:image:src" content="{{ $ogimage.Permalink }}" /> 
 
 <meta property="og:type" content="website" />
+
+<meta property="og:updated_time" content="{{ .Lastmod.Unix }}" />
 
 <meta name="robots" content="index,follow" /> 
 <meta name="googlebot" content="index,follow" />
