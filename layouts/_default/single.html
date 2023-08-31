@@ -43,6 +43,18 @@
         {{ end }}
       </div>
 
+      {{ if (gt .WordCount 100 ) }}
+      <div class="toc-container sticky top-14 transition-all">
+        <button type="button" class="collapsible bg-sky-100 dark:bg-slate-900 border-none cursor-pointer flex justify-between items-center font-bold px-7 py-3 rounded-t-lg rounded-b-lg text-left w-full">
+          <span class="m-0">Table of Contents</span>
+          <i data-feather="plus" class="w-4 h-4 stroke-[3px]"></i>
+        </button>
+        <div class="bg-sky-100 dark:bg-slate-900 px-7 py-0 hidden max-h-96 overflow-y-auto rounded-b-lg">
+          {{ .TableOfContents }}
+        </div>
+      </div>
+      {{ end }}
+
       <article class="mb-11">
         {{ .Content }}
       </article>

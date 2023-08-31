@@ -59,6 +59,7 @@ function headingLink() {
         link.setAttribute('style', 'margin-left: -1.5rem; margin-right: 0.5rem; color: rgb(56, 189, 248); display:inline-block;');
         link.innerHTML = '<i data-feather="link" style="width: 1rem; height: 1rem"></i>';
         element.insertBefore(link, element.firstChild);
+        element.style.scrollMargin = '120px';
     });
 
     feather.replace();
@@ -208,12 +209,52 @@ if (query) {
     document.getElementById('search-title').innerText = 'Search Results for ' + query
 }
 
+function makeCollapsibleCollapsible() {
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      toggleCollapsible(this);
+    });
+  }
+}
+
+function toggleCollapsible(el) {
+  el.classList.toggle("active");
+  el.classList.toggle("rounded-b-lg");
+
+  var content = el.nextElementSibling;
+  if (content.style.display === "block") {
+    content.style.display = "none";
+  } else {
+    content.style.display = "block";
+  }
+}
+
+function hideTocWhenClicked()
+{
+  var listItems = document.querySelectorAll('#TableOfContents > ul > li');
+
+  for (let i = 0; i < listItems.length; i++) {
+    listItems[i].addEventListener('click', function(e) {
+      var coll = document.getElementsByClassName("collapsible");
+
+      for (let j = 0; j < coll.length; j++) {
+        toggleCollapsible(coll[j]);
+      }
+    })
+  }
+}
+
 (function() {
     transitionAfterPageLoad();
     feather.replace();
     setThemeIcon();
     headingLink();
     navbarShrink();
+    makeCollapsibleCollapsible();
+    hideTocWhenClicked();
 
     document
         .getElementById("hamburger-btn")
@@ -232,6 +273,8 @@ if (query) {
 
     const observer = window.lozad();
     observer.observe();
-})()
+})();
 
-window.onscroll = function() {navbarShrink()};
+window.onscroll = function() {
+  navbarShrink();
+};
