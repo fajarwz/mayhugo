@@ -3,13 +3,20 @@
   <div>
     <!-- image  -->
     <div class="overflow-hidden max-h-[208px]">
-      <img data-src="{{ if isset .Params "featured_image" }}  
+      <a href="{{ if isset .Params "featured_image" }}  
       {{- $image := .Resources.GetMatch (.Params.featured_image) -}}
-      {{- $image = $image.Resize "x208 webp" -}}
       {{- $image.RelPermalink -}}
       {{ else }}
       {{- printf "%s%s" .Site.BaseURL .Site.Params.default_image -}}
-      {{ end }}" class="lozad min-h-[13rem] object-cover w-full" alt="{{ .Title }}'s featured image">
+      {{ end }}" target="_blank">
+        <img data-src="{{ if isset .Params "featured_image" }}  
+        {{- $image := .Resources.GetMatch (.Params.featured_image) -}}
+        {{- $image = $image.Resize "x208 webp" -}}
+        {{- $image.RelPermalink -}}
+        {{ else }}
+        {{- printf "%s%s" .Site.BaseURL .Site.Params.default_image -}}
+        {{ end }}" class="lozad min-h-[13rem] object-cover w-full" alt="{{ .Title }}'s featured image">
+      </a>
     </div>
 
     <!-- body  -->
