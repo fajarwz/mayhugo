@@ -36,10 +36,10 @@
 
     <!-- published date  -->
     <div class="mb-3 text-sm">
-      {{ $dateTime := .PublishDate.Format "2006-01-02" }}
+      {{ $dateTime := .Lastmod.Format "2006-01-02" }}
       {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
       <div class="text-gray-500">
-        Published on <time datetime="{{ $dateTime }}">{{ .PublishDate.Format $dateFormat }}</time>
+        Updated <time datetime="{{ $dateTime }}">{{ .Lastmod.Format $dateFormat }}</time>
       </div>
     </div>
 

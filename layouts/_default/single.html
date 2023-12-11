@@ -1,169 +1,203 @@
 {{ define "main" }}
 {{ $site := .Site }}
   <section>
-    <div class="container max-w-3xl">
-      <h1 class="leading-snug mb-3">{{ .Title }}</h1>
-      
-      <div class="mb-3">
-        {{ $dateTime := .PublishDate.Format "2006-01-02" }}
-        {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
-        <div class="text-sm">
-          Published on <time datetime="{{ $dateTime }}" class="text-sm">{{ .PublishDate.Format $dateFormat }}</time>
-        </div>
-      </div>
+    <div class="container">
 
-      {{ $tags := .Params.tags }} 
-      {{ $all_tags := .Site.Taxonomies.tags }} 
+      <div class="grid grid-cols-12 gap-10">
 
-      {{ with $tags }}
-        <ul class="flex flex-wrap justify-start list-none mb-11 -mx-1 pl-0">
-
-          {{ range $all_tags }}
-            {{ if in $tags .Page.Title }}
-            <li class="m-1">
-              <a href="{{ .Page.Permalink }}">
-                {{ partial "badges/tag.html" .Page.Title }}
-              </a>
-            </li>
-            {{ end }}
-          {{ end }}
-
-        </ul>
-      {{ end }}
-
-      <div class="h-min mb-5 overflow-hidden rounded-2xl">
-        {{ with .Resources.GetMatch (.Params.featured_image) }}
-          {{ $thumb := .Resize "720x webp" }}
-          <img data-src="{{ $thumb.Permalink }}" class="lozad w-full" alt="{{ .Title }}">
-        {{ else }}
-          {{ with resources.Get ($site.Params.default_image) }}
-            {{ $thumb := .Resize "720x webp" }}
-            <img data-src="{{ $thumb.Permalink }}" class="lozad object-cover w-full" alt="{{ .Title }}">
-          {{ end }}
-        {{ end }}
-      </div>
-
-      {{ if (gt .WordCount 100 ) }}
-      <div class="toc-container sticky top-14 transition-all">
-        <button type="button" class="collapsible bg-sky-100 dark:bg-slate-900 border-none cursor-pointer flex justify-between items-center font-bold px-7 py-3 rounded-t-lg rounded-b-lg text-left w-full">
-          <span class="m-0">Table of Contents</span>
-          <i data-feather="plus" class="w-4 h-4 stroke-[3px]"></i>
-        </button>
-        <div class="bg-sky-100 dark:bg-slate-900 px-7 py-0 hidden max-h-96 overflow-y-auto rounded-b-lg">
-          {{ .TableOfContents }}
-        </div>
-      </div>
-      {{ end }}
-
-      <article class="mb-11">
-        {{ .Content }}
-      </article>
-
-      <div class="mb-11">
-        <div class="mb-4">
-          <h2 class="font-bold mr-2">Share</h2>
-          <ul class="flex flex-wrap items-center list-none -m-2 pl-0">
-            <li class="m-2">
-              <a href="{{ printf "%s%s%s" "https://www.facebook.com/sharer/sharer.php?u=" .Permalink "?utm_source=facebook&utm_medium=social&utm_campaign=user-share" }}" 
-                class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
-                target="_blank"
-              >
-                <i data-feather="facebook"></i>
-              </a>
-            </li>
-            <li class="m-2">
-              <a href="{{ printf "%s%s%s%s" "https://twitter.com/intent/tweet?text=" .Title " " .Permalink "?utm_source=twitter&utm_medium=social&utm_campaign=user-share" }}" 
-                class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
-                title="Share to Facebook"
-                target="_blank"
-              >
-                <i data-feather="twitter"></i>
-              </a>
-            </li>
-            <li class="m-2">
-              <a href="{{ printf "%s%s%s%s%s" "https://www.linkedin.com/shareArticle?mini=true&url=" .Permalink "&title=" .Title "?utm_source=linkedin&utm_medium=social&utm_campaign=user-share" }}" 
-                class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
-                title="Share to LinkedIn"
-                target="_blank"
-              >
-                <i data-feather="linkedin"></i>
-              </a>
-            </li>
-            </li>
-            <li class="flex flex-row items-center m-2">
-              <input type="text" 
-                id="post-link"
-                class="hidden"
-                value="{{ .Permalink }}" 
-              >
-              <a href="javascript:;" 
-                id="copy-link"
-                class="mr-2 text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
-                title="Copy link"
-              >
-                <i data-feather="link"></i>
-              </a>
-              <div>
-                <span id="link-copied-notif" class="bg-green-500 hidden p-1 rounded text-sm">Link copied</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        {{ if .Site.Params.trakteer }}
-          <div class="mb-4">
-            <h2 class="font-bold mr-2">Support</h2>
-            <a href="https://trakteer.id/{{ .Site.Params.trakteer }}" target="_blank">Trakteer</a>
-          </div>
-        {{ end }}
-
-        {{ if .Site.Params.mailchimp_url }}
-          {{ partial "partials/mailchimp-email.html" . }}
-        {{ end }}
-
-        {{ if .Params.comments }}
-          <div>
-            <h2>Comments</h2>
-            {{ template "_internal/disqus.html" . }}
-          </div>
-        {{ end }}
-      </div>
-
-      <div>
-        <div class="mb-4">
-          <h2>Recent Posts</h2>
-          {{ with .Site.GetPage "section" "blog" }}
-            {{ range first 10 .Pages.ByPublishDate.Reverse }}
-            <a href="{{ .Permalink }}">
-              <h3>{{ .Title }}</h3>
-            </a>
-          {{ end }}
-          {{ else }}
-            <div class="text-center">
-              <em>Currently no post yet</em>
+        <div class="col-span-8">
+          <h1 class="leading-snug mb-3">{{ .Title }}</h1>
+        
+          <div class="mb-3">
+            {{ $dateTime := .Lastmod.Format "2006-01-02" }}
+            {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
+            <div class="text-sm">
+              Updated <time datetime="{{ $dateTime }}" class="text-sm">{{ .Lastmod.Format $dateFormat }}</time>
             </div>
-          {{ end }}
-        </div>
-        <div>
-          <h2>All Tags</h2>
-          <ul class="flex flex-wrap justify-start list-none pl-0">
-            {{ $all_tags := .Site.Taxonomies.tags }} 
-      
-            {{ with $all_tags }}
-              {{ range . }}
+          </div>
+  
+          {{ $tags := .Params.tags }} 
+          {{ $all_tags := .Site.Taxonomies.tags }} 
+  
+          {{ with $tags }}
+            <ul class="flex flex-wrap justify-start list-none mb-11 -mx-1 pl-0">
+  
+              {{ range $all_tags }}
+                {{ if in $tags .Page.Title }}
                 <li class="m-1">
                   <a href="{{ .Page.Permalink }}">
                     {{ partial "badges/tag.html" .Page.Title }}
                   </a>
                 </li>
+                {{ end }}
               {{ end }}
+  
+            </ul>
+          {{ end }}
+  
+          <div class="h-min mb-5 overflow-hidden rounded-2xl">
+            {{ with .Resources.GetMatch (.Params.featured_image) }}
+              {{ $thumb := .Resize "720x webp" }}
+              <img data-src="{{ $thumb.Permalink }}" class="lozad w-full" alt="{{ .Title }}">
             {{ else }}
-            <div class="text-center">
-              <em>Currently no tag yet</em>
-            </div>
+              {{ with resources.Get ($site.Params.default_image) }}
+                {{ $thumb := .Resize "720x webp" }}
+                <img data-src="{{ $thumb.Permalink }}" class="lozad object-cover w-full" alt="{{ .Title }}">
+              {{ end }}
             {{ end }}
-          </ul>
+          </div>
+  
+          {{ if (gt .WordCount 100 ) }}
+          <div class="toc-container sticky top-14 transition-all">
+            <button type="button" class="collapsible bg-sky-100 dark:bg-slate-900 border-none cursor-pointer flex justify-between items-center font-bold px-7 py-3 rounded-t-lg rounded-b-lg text-left w-full">
+              <span class="m-0">Table of Contents</span>
+              <i data-feather="plus" class="w-4 h-4 stroke-[3px]"></i>
+            </button>
+            <div class="bg-sky-100 dark:bg-slate-900 px-7 py-0 hidden max-h-96 overflow-y-auto rounded-b-lg">
+              {{ .TableOfContents }}
+            </div>
+          </div>
+          {{ end }}
+  
+          <article class="mb-11">
+            {{ .Content }}
+          </article>
+  
+          <div class="mb-11">
+            <div class="mb-4">
+              <h2 class="font-bold mr-2">Share</h2>
+              <ul class="flex flex-wrap items-center list-none -m-2 pl-0">
+                <li class="m-2">
+                  <a href="{{ printf "%s%s%s" "https://www.facebook.com/sharer/sharer.php?u=" .Permalink "?utm_source=facebook&utm_medium=social&utm_campaign=user-share" }}" 
+                    class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                    target="_blank"
+                  >
+                    <i data-feather="facebook"></i>
+                  </a>
+                </li>
+                <li class="m-2">
+                  <a href="{{ printf "%s%s%s%s" "https://twitter.com/intent/tweet?text=" .Title " " .Permalink "?utm_source=twitter&utm_medium=social&utm_campaign=user-share" }}" 
+                    class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                    title="Share to Facebook"
+                    target="_blank"
+                  >
+                    <i data-feather="twitter"></i>
+                  </a>
+                </li>
+                <li class="m-2">
+                  <a href="{{ printf "%s%s%s%s%s" "https://www.linkedin.com/shareArticle?mini=true&url=" .Permalink "&title=" .Title "?utm_source=linkedin&utm_medium=social&utm_campaign=user-share" }}" 
+                    class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                    title="Share to LinkedIn"
+                    target="_blank"
+                  >
+                    <i data-feather="linkedin"></i>
+                  </a>
+                </li>
+                </li>
+                <li class="flex flex-row items-center m-2">
+                  <input type="text" 
+                    id="post-link"
+                    class="hidden"
+                    value="{{ .Permalink }}" 
+                  >
+                  <a href="javascript:;" 
+                    id="copy-link"
+                    class="mr-2 text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500"
+                    title="Copy link"
+                  >
+                    <i data-feather="link"></i>
+                  </a>
+                  <div>
+                    <span id="link-copied-notif" class="bg-green-500 hidden p-1 rounded text-sm">Link copied</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+  
+            {{ if .Site.Params.trakteer }}
+              <div class="mb-4">
+                <h2 class="font-bold mr-2">Support</h2>
+                <a href="https://trakteer.id/{{ .Site.Params.trakteer }}" target="_blank">Trakteer</a>
+              </div>
+            {{ end }}
+  
+            {{ if .Site.Params.mailchimp_url }}
+              {{ partial "partials/mailchimp-email.html" . }}
+            {{ end }}
+  
+            {{ if .Params.comments }}
+              <div>
+                <h2>Comments</h2>
+                {{ template "_internal/disqus.html" . }}
+              </div>
+            {{ end }}
+          </div>
+  
+          <div>
+            <div class="mb-4">
+              <h2>Recent Posts</h2>
+              {{ with .Site.GetPage "section" "blog" }}
+                {{ range first 10 .Pages.ByPublishDate.Reverse }}
+                <a href="{{ .Permalink }}">
+                  <h3>{{ .Title }}</h3>
+                </a>
+              {{ end }}
+              {{ else }}
+                <div class="text-center">
+                  <em>Currently no post yet</em>
+                </div>
+              {{ end }}
+            </div>
+            <div>
+              <h2>All Tags</h2>
+              <ul class="flex flex-wrap justify-start list-none pl-0">
+                {{ $all_tags := .Site.Taxonomies.tags }} 
+          
+                {{ with $all_tags }}
+                  {{ range . }}
+                    <li class="m-1">
+                      <a href="{{ .Page.Permalink }}">
+                        {{ partial "badges/tag.html" .Page.Title }}
+                      </a>
+                    </li>
+                  {{ end }}
+                {{ else }}
+                <div class="text-center">
+                  <em>Currently no tag yet</em>
+                </div>
+                {{ end }}
+              </ul>
+            </div>
+          </div>
         </div>
+  
+        <div class="col-span-4">
+          <div class="flex items-center gap-4 mb-4">
+            {{ with resources.Get ($site.Params.pp) }}
+                {{ $brand := .Resize "x78 webp" }}
+                <img data-src="{{ $brand.Permalink }}" class="lozad rounded-full w-16 h-16" alt="{{ $site.Title }}'s photo">
+            {{ end }}
+            <span class="font-bold">{{ $site.Author.name }}</span>
+          </div>
+          <p>{{ $site.Author.description }}</p>
+          {{- if isset $site.Author "email" }}
+          <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg">
+            <span class="text-slate-900 dark:text-white">Email me</span>
+          </a>
+          {{- end -}}
+          {{- if isset $site.Data "social_profile_card" }}
+          <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
+            {{ range $site.Data.social_profile_card.social_icons }}
+                <li class="m-3">
+                  <a href="{{ printf .url (index $site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
+                    <i data-feather="{{ .icon }}"></i>
+                  </a>
+                </li>
+            {{- end -}}
+          </ul>
+          {{ end }}
+        </div>
+
       </div>
       
     </div>

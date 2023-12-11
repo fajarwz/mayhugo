@@ -24,7 +24,7 @@ window.store = {
       {{- $summary = .Summary -}}
     {{ end }}
 
-    {{ $dateTime := .PublishDate.Format "2006-01-02" }}
+    {{ $dateTime := .Lastmod.Format "2006-01-02" }}
     {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
 
     {{ $tags := .Params.tags }} 
@@ -46,8 +46,8 @@ window.store = {
         "image" :{{- $thumb.RelPermalink -}},
         "summary" :{{- $summary -}},
         "content": {{- .Content | plainify -}},
-        "publishedOnDate": {{- $dateTime -}}, 
-        "publishedOnDateWithFormat": {{- .PublishDate.Format $dateFormat -}},
+        "lastmodDate": {{- $dateTime -}}, 
+        "lastmodDateWithFormat": {{- .Lastmod.Format $dateFormat -}},
         "url": "{{- .Permalink -}}",
         "tagName": {{- $tagName -}},
         "tagUrl": {{- $tagUrl -}},

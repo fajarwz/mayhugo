@@ -17,34 +17,18 @@ function toggleDarkMode() {
     let darkModeTogglerSun = document.getElementById("dark-mode-toggler-sun");
     let darkModeTogglerMoon = document.getElementById("dark-mode-toggler-moon");
 
-    if (!("theme" in localStorage)) {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            html.classList.remove("dark");
-            localStorage.setItem("theme", "light");
+    if (localStorage.getItem("theme") === "dark") {
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
 
-            darkModeTogglerSun.style.display = "flex";
-            darkModeTogglerMoon.style.display = "none"; 
-        } else {
-            html.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-
-            darkModeTogglerSun.style.display = "none";
-            darkModeTogglerMoon.style.display = "flex";
-        }
+      darkModeTogglerSun.style.display = "flex";
+      darkModeTogglerMoon.style.display = "none";                    
     } else {
-        if (localStorage.getItem("theme") === "dark") {
-            html.classList.remove("dark");
-            localStorage.setItem("theme", "light");
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
 
-            darkModeTogglerSun.style.display = "flex";
-            darkModeTogglerMoon.style.display = "none";                    
-        } else {
-            html.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-
-            darkModeTogglerSun.style.display = "none";
-            darkModeTogglerMoon.style.display = "flex";
-        }
+      darkModeTogglerSun.style.display = "none";
+      darkModeTogglerMoon.style.display = "flex";
     }
 }
 
@@ -137,7 +121,7 @@ function displayResults (results, store) {
             <!-- published date  -->
             <div class="mb-3 text-sm">
               <div class="text-gray-500">
-                Published on <time datetime="${item.publishedOnDate}">${item.publishedOnDateWithFormat}</time>
+                Updated <time datetime="${item.lastmodDate}">${item.lastmodDateWithFormat}</time>
               </div>
             </div>
   

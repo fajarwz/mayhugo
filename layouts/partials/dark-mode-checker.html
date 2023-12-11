@@ -1,17 +1,13 @@
 <script defer>
   function checkDarkMode() {
-    if (!("theme" in localStorage)) {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            document.getElementById("html").classList.add("dark");
-        } else {
-            document.getElementById("html").classList.remove("dark");
-        }
+    let html = document.getElementById("html");
+
+    if (!("theme" in localStorage) || localStorage.getItem("theme") === "dark") {
+      html.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
-        if (localStorage.getItem("theme") === "dark") {
-            document.getElementById("html").classList.add("dark");
-        } else {
-            document.getElementById("html").classList.remove("dark");
-        }
+      html.classList.remove("dark");
+      localStorage.setItem("theme", "light");
     }
   }
 
