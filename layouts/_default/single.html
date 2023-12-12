@@ -3,9 +3,9 @@
   <section>
     <div class="container">
 
-      <div class="grid grid-cols-12 gap-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
 
-        <div class="col-span-8">
+        <div class="col-span-1 md:col-span-8">
           <h1 class="leading-snug mb-3">{{ .Title }}</h1>
         
           <div class="mb-3">
@@ -63,6 +63,40 @@
             {{ .Content }}
           </article>
   
+        </div>
+  
+        <div class="col-span-1 md:col-span-4">
+          <div class="flex items-center gap-4 mb-4">
+            {{ with resources.Get ($site.Params.pp) }}
+                {{ $brand := .Resize "x78 webp" }}
+                <img data-src="{{ $brand.Permalink }}" class="lozad rounded-full w-16 h-16" alt="{{ $site.Title }}'s photo">
+            {{ end }}
+            <span class="font-bold">{{ $site.Author.name }}</span>
+          </div>
+          <p>{{ $site.Author.description }}</p>
+          {{- if isset $site.Author "email" }}
+          <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg">
+            <span class="text-slate-900 dark:text-white">Email me</span>
+          </a>
+          {{- end -}}
+          {{- if isset $site.Data "social_profile_card" }}
+          <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
+            {{ range $site.Data.social_profile_card.social_icons }}
+                <li class="m-3">
+                  <a href="{{ printf .url (index $site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
+                    <i data-feather="{{ .icon }}"></i>
+                  </a>
+                </li>
+            {{- end -}}
+          </ul>
+          {{ end }}
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12">
+        <div class="col-span-1 md:col-span-8">
+
           <div class="mb-11">
             <div class="mb-4">
               <h2 class="font-bold mr-2">Share</h2>
@@ -113,18 +147,18 @@
                 </li>
               </ul>
             </div>
-  
+    
             {{ if .Site.Params.trakteer }}
               <div class="mb-4">
                 <h2 class="font-bold mr-2">Support</h2>
                 <a href="https://trakteer.id/{{ .Site.Params.trakteer }}" target="_blank">Trakteer</a>
               </div>
             {{ end }}
-  
+    
             {{ if .Site.Params.mailchimp_url }}
               {{ partial "partials/mailchimp-email.html" . }}
             {{ end }}
-  
+    
             {{ if .Params.comments }}
               <div>
                 <h2>Comments</h2>
@@ -132,7 +166,7 @@
               </div>
             {{ end }}
           </div>
-  
+    
           <div>
             <div class="mb-4">
               <h2>Recent Posts</h2>
@@ -169,35 +203,8 @@
               </ul>
             </div>
           </div>
-        </div>
-  
-        <div class="col-span-4">
-          <div class="flex items-center gap-4 mb-4">
-            {{ with resources.Get ($site.Params.pp) }}
-                {{ $brand := .Resize "x78 webp" }}
-                <img data-src="{{ $brand.Permalink }}" class="lozad rounded-full w-16 h-16" alt="{{ $site.Title }}'s photo">
-            {{ end }}
-            <span class="font-bold">{{ $site.Author.name }}</span>
-          </div>
-          <p>{{ $site.Author.description }}</p>
-          {{- if isset $site.Author "email" }}
-          <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg">
-            <span class="text-slate-900 dark:text-white">Email me</span>
-          </a>
-          {{- end -}}
-          {{- if isset $site.Data "social_profile_card" }}
-          <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
-            {{ range $site.Data.social_profile_card.social_icons }}
-                <li class="m-3">
-                  <a href="{{ printf .url (index $site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
-                    <i data-feather="{{ .icon }}"></i>
-                  </a>
-                </li>
-            {{- end -}}
-          </ul>
-          {{ end }}
-        </div>
 
+        </div>
       </div>
       
     </div>
