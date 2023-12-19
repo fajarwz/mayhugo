@@ -56,7 +56,7 @@ function navbarShrink() {
     if (document.documentElement.scrollTop > 200) {
         nav.classList.add("sticky");
         nav.classList.remove("py-6");
-        nav.classList.add("py-1");
+        nav.classList.add("lg:py-1");
 
         if (document.getElementById("brand-title") !== null)
             document.getElementById("brand-title").classList.add("text-3xl");
@@ -71,7 +71,7 @@ function navbarShrink() {
     } else if (document.documentElement.scrollTop < 1) {
         nav.classList.remove("sticky");
         nav.classList.add("py-6");
-        nav.classList.remove("py-1");
+        nav.classList.remove("lg:py-1");
 
         if (document.getElementById("brand-title") !== null)
             document.getElementById("brand-title").classList.remove("text-3xl");

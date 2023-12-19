@@ -1,5 +1,5 @@
 {{ $site := .Site }}
-<nav id="nav" class="py-6 bg-sky-50 dark:bg-slate-800 transition-all top-0">
+<nav id="nav" class="bg-sky-50 dark:bg-slate-800 transition-all top-0 py-6 z-10">
     <div class="container flex flex-col lg:flex-row {{ if not .IsHome }} lg:justify-between {{ else }} lg:justify-center {{ end }} lg:items-center">
         <div class="flex flex-row items-center justify-between">
             {{ if not .IsHome }}
@@ -14,7 +14,7 @@
                 
             {{ end }}
             <a href="javascript:;" id="hamburger-btn" class="lg:hidden">
-                <i data-feather="menu" class="h-14"></i>
+                <i data-feather="menu" class="h-14 md:h-12"></i>
             </a>
         </div>
         <div
