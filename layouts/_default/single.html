@@ -66,29 +66,54 @@
         </div>
   
         <div class="col-span-1 md:col-span-4">
-          <div class="flex items-center gap-4 mb-4">
-            {{ with resources.Get ($site.Params.pp) }}
-                {{ $brand := .Resize "x78 webp" }}
-                <img data-src="{{ $brand.Permalink }}" class="lozad rounded-full w-16 h-16" alt="{{ $site.Title }}'s photo">
-            {{ end }}
-            <span class="font-bold">{{ $site.Author.name }}</span>
-          </div>
-          <p>{{ $site.Author.description }}</p>
-          {{- if isset $site.Author "email" }}
-          <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg">
-            <span class="text-slate-900 dark:text-white">Email me</span>
-          </a>
-          {{- end -}}
-          {{- if isset $site.Data "social_profile_card" }}
-          <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
-            {{ range $site.Data.social_profile_card.social_icons }}
-                <li class="m-3">
-                  <a href="{{ printf .url (index $site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
-                    <i data-feather="{{ .icon }}"></i>
-                  </a>
-                </li>
+          <div>
+            <div class="flex items-center gap-4 mb-4">
+              {{ with resources.Get ($site.Params.pp) }}
+                  {{ $brand := .Resize "x78 webp" }}
+                  <img data-src="{{ $brand.Permalink }}" class="lozad rounded-full w-16 h-16" alt="{{ $site.Title }}'s photo">
+              {{ end }}
+              <span class="font-bold">{{ $site.Author.name }}</span>
+            </div>
+            <p>{{ $site.Author.description }}</p>
+            {{- if isset $site.Author "email" }}
+            <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg">
+              <span class="text-slate-900 dark:text-white">Email me</span>
+            </a>
             {{- end -}}
-          </ul>
+            {{- if isset $site.Data "social_profile_card" }}
+            <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
+              {{ range $site.Data.social_profile_card.social_icons }}
+                  <li class="m-3">
+                    <a href="{{ printf .url (index $site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
+                      <i data-feather="{{ .icon }}"></i>
+                    </a>
+                  </li>
+              {{- end -}}
+            </ul>
+            {{ end }}
+          </div>
+          
+          {{- if isset $site.Data "ads" }}
+          <div>
+            <div class="mb-6"><strong>Ads</strong></div>
+            <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
+              {{ range $site.Data.ads.ads }}
+                <li class="mb-6">
+                  {{ if isset . "rawhtml" }}
+                    {{ safeHTML .rawhtml }}
+                  {{ else }}
+                    {{ $title := .title }}
+                    <a href="{{ printf .url }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ $title }}" target="_blank">
+                      {{ with resources.Get (.image) }}
+                          {{ $image := .Resize "386x webp" }}
+                          <img data-src="{{ $image.Permalink }}" class="lozad" alt="{{ $title }}">
+                      {{ end }}
+                    </a>
+                  {{ end }}
+                </li>
+              {{- end -}}
+            </ul>
+          </div>
           {{ end }}
         </div>
 
