@@ -1,4 +1,4 @@
 {{ $image := (.Page.Resources.GetMatch (.Get 0)) }}
 <a href="{{ $image.RelPermalink }}" target="_blank">
-  <img data-src="{{ $image.RelPermalink }}" class="h-auto lozad mb-4 rounded-md w-[792px]" alt="{{ $image }}">
+  <img data-src="{{ $image.RelPermalink }}" class="h-auto lozad mb-4 rounded-md w-[792px]" alt="{{ $image }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
 </a>
