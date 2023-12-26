@@ -23,7 +23,7 @@
         >
             {{ range .Site.Menus.main }}
             <a
-                class="text-slate-900 transition-all dark:text-slate-50 flex items-center h-10 font-bold hover:no-underline hover:text-sky-600 dark:hover:text-sky-500"
+                class="text-slate-900 transition-all dark:text-slate-50 flex items-center h-10 font-bold hover:no-underline hover:text-sky-600 dark:hover:text-sky-500 no-underline"
                 href="{{ .URL }}"
             >
                 <span class="my-auto">{{ print .Name | safeHTML }}</span>

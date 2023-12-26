@@ -25,7 +25,7 @@
               {{ range $all_tags }}
                 {{ if in $tags .Page.Title }}
                 <li class="m-1">
-                  <a href="{{ .Page.Permalink }}">
+                  <a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}" class="no-underline">
                     {{ partial "badges/tag.html" .Page.Title }}
                   </a>
                 </li>
@@ -76,7 +76,7 @@
             </div>
             <p>{{ $site.Author.description }}</p>
             {{- if isset $site.Author "email" }}
-            <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg">
+            <a href="mailto:{{- $site.Author.email -}}" class="button bg-sky-100 hover:bg-sky-200 dark:bg-slate-600 hover:dark:bg-slate-700 hover:cursor-pointer hover:no-underline block text-center px-3 py-1.5 mb-4 rounded-lg no-underline">
               <span class="text-slate-900 dark:text-white">Email me</span>
             </a>
             {{- end -}}
@@ -215,7 +215,7 @@
                 {{ with $all_tags }}
                   {{ range . }}
                     <li class="m-1">
-                      <a href="{{ .Page.Permalink }}">
+                      <a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}" class="no-underline">
                         {{ partial "badges/tag.html" .Page.Title }}
                       </a>
                     </li>

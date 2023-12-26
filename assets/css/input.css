@@ -85,7 +85,7 @@ code:not(pre code) {
 }
 
 a {
-    @apply text-sky-600 hover:underline dark:text-sky-500
+    @apply text-sky-600 underline underline-offset-[6px] dark:text-sky-500
 }
 
 blockquote {

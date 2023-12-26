@@ -133,7 +133,7 @@ function displayResults (results, store) {
                 for(let i = 0; i < item.tagName.length; i++){
                   html += 
                   `<li class="m-1">
-                    <a href="${item.tagUrl[i]}">
+                    <a href="${item.tagUrl[i]}" title="${item.tagName[i]}">
                       <span
                         class="bg-gray-300 px-4 h-min py-1 rounded-md text-sm text-slate-900 
                         hover:bg-sky-600 hover:text-white dark:bg-slate-600 

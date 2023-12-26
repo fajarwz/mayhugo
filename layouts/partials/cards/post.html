@@ -21,7 +21,7 @@
   <div class="p-5">
 
     <!-- title  -->
-    <a href="{{ .RelPermalink }}" class="text-slate-900 dark:text-slate-50 hover:no-underline hover:text-sky-600 dark:hover:text-sky-500">
+    <a href="{{ .RelPermalink }}" class="text-slate-900 dark:text-slate-50 no-underline hover:text-sky-600 dark:hover:text-sky-500">
       <h3 class="leading-normal">{{ .Title }}</h3>
     </a>
 
@@ -52,7 +52,7 @@
         {{ range $all_tags }}
           {{ if in $tags .Page.Title }}
             <li class="m-1">
-              <a href="{{ .Page.Permalink }}">
+              <a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}">
                 {{ partial "badges/tag.html" .Page.Title }}
               </a>
             </li>

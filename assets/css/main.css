@@ -563,16 +563,8 @@ video {
   top: 0px;
 }
 
-.top-14 {
-  top: 3.5rem;
-}
-
 .top-16 {
   top: 4rem;
-}
-
-.top-1 {
-  top: 0.25rem;
 }
 
 .z-10 {
@@ -1190,10 +1182,8 @@ code:not(pre code) {
 a {
   --tw-text-opacity: 1;
   color: rgb(2 132 199 / var(--tw-text-opacity));
-}
-
-a:hover {
   text-decoration-line: underline;
+  text-underline-offset: 6px;
 }
 
 .dark a {
@@ -1923,11 +1913,6 @@ thead {
   .md\:grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
-
-  .md\:py-1 {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -1982,11 +1967,6 @@ thead {
   .lg\:py-1 {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-  }
-
-  .lg\:py-0 {
-    padding-top: 0px;
-    padding-bottom: 0px;
   }
 
   .dark .dark\:lg\:bg-transparent {
