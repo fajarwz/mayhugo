@@ -14,7 +14,7 @@
       {{ end }}
     {{ end }}
 
-    <img data-src="{{- $thumb.RelPermalink -}}" class="h-[13rem] lozad object-cover w-full" alt="{{ .Title }}'s featured image">
+    <img data-src="{{- $thumb.RelPermalink -}}" class="h-[13rem] lozad object-cover w-full" alt="{{ .Title }}'s featured image" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
   </div>
 
   <!-- body  -->

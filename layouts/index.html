@@ -6,7 +6,7 @@
       {{ if isset $site.Params "pp" }}
         {{ with resources.Get ($site.Params.pp) }}
             {{ $brand := .Resize "x192 webp" }}
-            <img data-src="{{ $brand.Permalink }}" class="lozad mx-auto rounded-full w-48 h-48" alt="{{ $site.Title }}'s photo">
+            <img data-src="{{ $brand.Permalink }}" class="lozad mx-auto rounded-full w-48 h-48" alt="{{ $site.Title }}'s photo" width="{{ $brand.Width }}" height="{{ $brand.Height }}">
         {{ end }}
       {{ else }}
           <h1 class="mb-0">{{ $site.Title }}</h1>
