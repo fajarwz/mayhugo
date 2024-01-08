@@ -109,7 +109,7 @@ function displayResults (results, store) {
           <div class="p-5">
   
             <!-- title  -->
-            <a href="${item.url}" class="text-slate-900 dark:text-slate-50 hover:no-underline hover:text-sky-600 dark:hover:text-sky-500">
+            <a href="${item.url}" class="text-slate-900 dark:text-slate-50 no-underline hover:text-sky-600 dark:hover:text-sky-500">
               <h3>${item.title}</h3>
             </a>
   
@@ -133,7 +133,7 @@ function displayResults (results, store) {
                 for(let i = 0; i < item.tagName.length; i++){
                   html += 
                   `<li class="m-1">
-                    <a href="${item.tagUrl[i]}" title="${item.tagName[i]}">
+                    <a href="${item.tagUrl[i]}" title="${item.tagName[i]}" class="no-underline">
                       <span
                         class="bg-gray-300 px-4 h-min py-1 rounded-md text-sm text-slate-900 
                         hover:bg-sky-600 hover:text-white dark:bg-slate-600 

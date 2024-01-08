@@ -52,7 +52,7 @@
         {{ range $all_tags }}
           {{ if in $tags .Page.Title }}
             <li class="m-1">
-              <a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}">
+              <a href="{{ .Page.Permalink }}" title="{{ .Page.Title }}" class="no-underline">
                 {{ partial "badges/tag.html" .Page.Title }}
               </a>
             </li>
