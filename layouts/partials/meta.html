@@ -63,7 +63,8 @@
 <meta name="twitter:image" content="{{ $ogimage.Permalink }}" />
 <meta name="twitter:image:src" content="{{ $ogimage.Permalink }}" /> 
 
-<meta property="og:type" content="website" />
+{{ $link := findRE "blog/.*" .Permalink }}
+<meta property="og:type" content="{{ if gt (len $link) 0 }}article{{ else }}website{{ end }}" />
 
 <meta property="og:updated_time" content="{{ .Lastmod.Unix }}" />
 
