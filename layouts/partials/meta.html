@@ -3,38 +3,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="twitter:card" content="summary_large_image">
-{{ if isset .Site.Author "twitter" }}
-<meta name="twitter:site" content="{{ printf "%s%s" "@" .Site.Author.twitter }}">
-<meta name="twitter:creator" content="{{ printf "%s%s" "@" .Site.Author.twitter }}">
-{{ end }}
-
 {{ $title := print .Title " | " .Site.Title }}
 {{ if eq .Title "Blog" }}{{ $title = printf "%s%s%s" .Site.Params.blog_tagline " | " .Site.Title }}{{ end }}
 {{ if .IsHome }}{{ $title = printf "%s%s%s" .Site.Title " | " .Site.Params.site_description }}{{ end }}
-
-<meta property="og:title" content="{{ $title }}" />
-<meta name="twitter:title" content="{{ $title }}" />
-<meta itemprop="name" content="{{ $title }}" />
-<meta name="application-name" content="{{ $title }}" />
-<meta property="og:site_name" content="{{ .Site.Title }}" />
 
 {{ $meta_description := .Site.Params.site_description }}
 {{ if .Summary }}
   {{ $meta_description = .Summary }}
 {{ end }}
-
-<meta name="description" content="{{ $meta_description }}" />
-<meta itemprop="description" content="{{ $meta_description }}" />
-<meta property="og:description" content="{{ $meta_description }}" />
-<meta name="twitter:description" content="{{ $meta_description }}" />
-
-<meta name="keywords" content="{{ .Site.Params.keywords }}">
-
-<base href="{{ .Permalink }}">
-<meta name="url" content="{{ .Permalink }}" />
-<meta name="twitter:url" content="{{ .Permalink }}" /> 
-<meta property="og:url" content="{{ .Permalink }}" />
 
 {{ $ogimage := "" }}
 {{- with .Resources.GetMatch (.Params.featured_image) -}} 
@@ -54,20 +30,43 @@
   {{ end }}
 {{ end }}
 
-<meta itemprop="image" content="{{ $ogimage.Permalink }}" />
-<meta image="{{ $ogimage.Permalink }}">
+{{ if isset .Site.Author "twitter" }}
+<meta name="twitter:site" content="{{ printf "%s%s" "@" .Site.Author.twitter }}">
+<meta name="twitter:creator" content="{{ printf "%s%s" "@" .Site.Author.twitter }}">
+{{ end }}
+<meta name="twitter:title" content="{{ $title }}" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="{{ $meta_description }}" />
+<meta name="twitter:url" content="{{ .Permalink }}" /> 
+<meta name="twitter:image" content="{{ $ogimage.Permalink }}" />
+<meta name="twitter:image:src" content="{{ $ogimage.Permalink }}" /> 
+
+<meta property="og:title" content="{{ $title }}" />
+<meta property="og:description" content="{{ $meta_description }}" />
 <meta property="og:image" itemprop="image" content="{{ $ogimage.Permalink }}" /> 
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:site_name" content="{{ .Site.Title }}" />
 <meta property="og:image:secure_url" itemprop="image" content="{{ $ogimagewa.Permalink }}" /> 
 <meta property="og:image:type" content="image/jpg" />
 <meta property="og:image:width" content="256">
 <meta property="og:image:height" content="256">
-<meta name="twitter:image" content="{{ $ogimage.Permalink }}" />
-<meta name="twitter:image:src" content="{{ $ogimage.Permalink }}" /> 
-
 {{ $link := findRE "blog/.*" .Permalink }}
 <meta property="og:type" content="{{ if gt (len $link) 0 }}article{{ else }}website{{ end }}" />
-
 <meta property="og:updated_time" content="{{ .Lastmod.Unix }}" />
+
+<meta itemprop="name" content="{{ $title }}" />
+<meta name="application-name" content="{{ $title }}" />
+
+<meta name="description" content="{{ $meta_description }}" />
+<meta itemprop="description" content="{{ $meta_description }}" />
+
+<meta name="keywords" content="{{ .Site.Params.keywords }}">
+
+<base href="{{ .Permalink }}">
+<meta name="url" content="{{ .Permalink }}" />
+
+<meta itemprop="image" content="{{ $ogimage.Permalink }}" />
+<meta image="{{ $ogimage.Permalink }}">
 
 <meta name="robots" content="index,follow" /> 
 <meta name="googlebot" content="index,follow" />
