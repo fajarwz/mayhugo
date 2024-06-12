@@ -38,10 +38,10 @@
 
 {{ $ogimage := "" }}
 {{- with .Resources.GetMatch (.Params.featured_image) -}} 
-  {{- $ogimage = .Fill "1200x630 jpg" -}}
+  {{- $ogimage = .Resize "x630 jpg" -}}
 {{ else }}
   {{ with resources.Get ($site.Params.ogimage) }}
-    {{ $ogimage = .Fill "1200x630 jpg" }}
+    {{ $ogimage = .Resize "x630 jpg" }}
   {{ end }}
 {{ end }}
 
@@ -55,6 +55,7 @@
 {{ end }}
 
 <meta itemprop="image" content="{{ $ogimage.Permalink }}" />
+<meta image="{{ $ogimage.Permalink }}">
 <meta property="og:image" itemprop="image" content="{{ $ogimage.Permalink }}" /> 
 <meta property="og:image:secure_url" itemprop="image" content="{{ $ogimagewa.Permalink }}" /> 
 <meta property="og:image:type" content="image/jpg" />
