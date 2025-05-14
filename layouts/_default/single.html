@@ -98,7 +98,7 @@
             <div class="mb-6"><strong>Ads</strong></div>
             <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
               {{ range $site.Data.ads.ads }}
-                <li class="mb-6">
+                <li class="mb-6 max-w-xs px-2">
                   {{ if isset . "rawhtml" }}
                     {{ safeHTML .rawhtml }}
                   {{ else }}
@@ -106,7 +106,7 @@
                     <a href="{{ printf .url }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ $title }}" target="_blank">
                       {{ with resources.Get (.image) }}
                           {{ $image := .Resize (printf "%dx%d webp" .Width .Height) }}
-                          <img data-src="{{ $image.Permalink }}" class="lozad" alt="{{ $title }}" width="{{ .Width }}" height="{{ .Height }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+                          <img data-src="{{ $image.Permalink }}" class="lozad max-w-full h-auto" alt="{{ $title }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
                       {{ end }}
                     </a>
                   {{ end }}
