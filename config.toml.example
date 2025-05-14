@@ -39,6 +39,8 @@ canonifyURLs = true
   # mailchimp_url = "" # mailchimp
   mailchimp_detect_page = true # subscribe in what page
   mailchimp_copywriting = "Sign up for my email newsletter and never miss a beat in the world of web development. Stay up-to-date on the latest trends, techniques, and tools. Don't miss out on valuable insights. Subscribe now!"
+  donationEnabled = true
+  githubSponsors = "fajarwz"
 
 [Author]
   name = "Fajar Windhu Zulfikar"

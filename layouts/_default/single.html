@@ -72,7 +72,17 @@
                   {{ $brand := .Resize "x78 webp" }}
                   <img data-src="{{ $brand.Permalink }}" class="lozad rounded-full w-16 h-16" alt="{{ $site.Title }}'s photo" width="{{ $brand.Width }}" height="{{ $brand.Height }}">
               {{ end }}
-              <span class="font-bold">{{ $site.Author.name }}</span>
+              <div>
+                <div class="font-bold mb-1">{{ $site.Author.name }}</div>
+
+                {{ if $site.Params.donationEnabled }}
+                  {{ if $site.Params.githubSponsors }}
+                    <div>
+                      <iframe src="https://github.com/sponsors/{{ $site.Params.githubSponsors }}/button" title="Sponsor {{ getenv "HUGO_PARAMS_GITHUB_SPONSORS" }}" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+                    </div>
+                  {{ end }}
+                {{ end }}
+              </div>
             </div>
             <p>{{ $site.Author.description }}</p>
             {{- if isset $site.Author "email" }}
@@ -173,10 +183,14 @@
               </ul>
             </div>
     
-            {{ if .Site.Params.trakteer }}
+            {{ if $site.Params.donationEnabled }}
               <div class="mb-4">
                 <h2 class="font-bold mr-2">Support</h2>
-                <a href="https://trakteer.id/{{ .Site.Params.trakteer }}" target="_blank">Trakteer</a>
+                  {{ if $site.Params.githubSponsors }}
+                  <div>
+                    <iframe src="https://github.com/sponsors/{{ $site.Params.githubSponsors }}/button" title="Sponsor {{ getenv "HUGO_PARAMS_GITHUB_SPONSORS" }}" height="32" width="114" style="border: 0; border-radius: 6px;"></iframe>
+                  </div>
+                {{ end }}
               </div>
             {{ end }}
     

@@ -695,6 +695,10 @@ video {
   margin-top: 4rem;
 }
 
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -909,6 +913,10 @@ video {
 .rounded-t-lg {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
+}
+
+.border {
+  border-width: 1px;
 }
 
 .border-none {
