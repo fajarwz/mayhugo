@@ -1,6 +1,6 @@
 {{ $site := .Site }}
 {{ $thumb := "" }}
-<div class="bg-white overflow-hidden rounded-lg shadow-md dark:bg-slate-900 dark:shadow-slate-700">
+<div class="bg-white overflow-hidden rounded-lg shadow-md dark:bg-slate-900 dark:shadow-slate-700 flex flex-col min-h-[24rem]">
 
   <!-- image  -->
   <div class="overflow-hidden">
@@ -14,7 +14,7 @@
       {{ end }}
     {{ end }}
 
-    <img data-src="{{- $thumb.RelPermalink -}}" class="h-[13rem] lozad object-cover w-full" alt="{{ .Title }}'s featured image" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
+    <img data-src="{{- $thumb.RelPermalink -}}" class="lozad object-cover w-full" alt="{{ .Title }}'s featured image" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}">
   </div>
 
   <!-- body  -->
