@@ -58,11 +58,11 @@
     <div class="flex items-center gap-3 text-xs text-slate-400 dark:text-slate-500 mt-auto">
       {{ $dateTime := .Lastmod.Format "2006-01-02" }}
       {{ $dateFormat := .Site.Params.dateFormat | default "Jan 2, 2006" }}
-      <time datetime="{{ $dateTime }}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-1 -mt-0.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        {{ .Lastmod.Format $dateFormat }}
-      </time>
-      <span class="reading-time">
+      <span class="post-meta">
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <time class="post-meta" datetime="{{ $dateTime }}">{{ .Lastmod.Format $dateFormat }}</time>
+      </span>
+      <span class="post-meta">
         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         {{ .ReadingTime }} min read
       </span>

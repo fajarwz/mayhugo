@@ -667,10 +667,6 @@ video {
   margin-bottom: auto;
 }
 
-.-mt-0\.5 {
-  margin-top: -0.125rem;
-}
-
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -713,10 +709,6 @@ video {
 
 .mb-8 {
   margin-bottom: 2rem;
-}
-
-.mr-1 {
-  margin-right: 0.25rem;
 }
 
 .mr-2 {
@@ -1969,9 +1961,9 @@ thead:is(.dark *) {
   background-color: rgb(55 48 163 / 0.5);
 }
 
-/* ===== NEW: Reading time badge ===== */
+/* ===== NEW: Post meta (date, reading time) ===== */
 
-.reading-time {
+.post-meta {
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
@@ -1981,7 +1973,7 @@ thead:is(.dark *) {
   color: rgb(148 163 184 / var(--tw-text-opacity, 1));
 }
 
-.reading-time:is(.dark *) {
+.post-meta:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(100 116 139 / var(--tw-text-opacity, 1));
 }

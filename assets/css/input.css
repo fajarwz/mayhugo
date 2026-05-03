@@ -179,8 +179,8 @@ thead {
            transition-colors hover:bg-indigo-100 dark:hover:bg-indigo-800/50
 }
 
-/* ===== NEW: Reading time badge ===== */
-.reading-time {
+/* ===== NEW: Post meta (date, reading time) ===== */
+.post-meta {
     @apply inline-flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500
 }
 
