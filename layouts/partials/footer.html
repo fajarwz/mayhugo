@@ -1,7 +1,9 @@
-<footer class="bg-white mt-16 dark:bg-slate-900">
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800">
   
-  <div class= "py-6 text-center text-gray-500">
+  <div class= "py-8 text-center text-slate-500 dark:text-slate-400">
     {{ partial "socials.html" . }}
-    Copyright © {{ now.Format "2006"}} {{ .Site.Title }}. Built with <a href="https://gohugo.io" class="dark:text-sky-500" target="_blank">Hugo</a>, theme by <a href="https://github.com/fajarwz/mayhugo" class="dark:text-sky-500" target="_blank">Mayhugo</a>
+    <p class="text-sm mt-4 mb-0">
+      Copyright © {{ now.Format "2006"}} {{ .Site.Title }}. Built with <a href="https://gohugo.io" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500" target="_blank" rel="noopener">Hugo</a>, theme by <a href="https://github.com/fajarwz/mayhugo" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-500" target="_blank" rel="noopener">Mayhugo</a>
+    </p>
   </div>
 </footer>

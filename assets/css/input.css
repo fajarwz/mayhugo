@@ -17,7 +17,18 @@
 }
 
 body {
-    @apply font-sans text-slate-900 bg-sky-50 dark:text-slate-50 dark:bg-slate-800 
+    @apply font-sans text-slate-900 bg-white dark:text-slate-100 dark:bg-slate-950;
+    background-image: 
+        radial-gradient(ellipse at top right, rgba(99, 102, 241, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom left, rgba(16, 185, 129, 0.05) 0%, transparent 60%);
+    background-attachment: fixed;
+}
+
+.dark body, body:is(.dark *) {
+    background-image: 
+        radial-gradient(ellipse at top right, rgba(99, 102, 241, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom left, rgba(16, 185, 129, 0.08) 0%, transparent 60%);
+    background-attachment: fixed;
 }
 
 main {
@@ -25,15 +36,15 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    @apply font-bold
+    @apply font-bold tracking-tight
 }
 
 h1 {
-    @apply text-4xl
+    @apply text-4xl md:text-5xl
 }
 
 h2 {
-    @apply text-3xl
+    @apply text-3xl md:text-4xl
 }
 
 h3 {
@@ -81,15 +92,19 @@ pre code span {
 }
 
 code:not(pre code) {
-    @apply px-2 py-1 rounded-md text-sm bg-gray-300 dark:bg-slate-600 
+    @apply px-2 py-1 rounded-md text-sm bg-slate-100 dark:bg-slate-800 text-indigo-600 dark:text-indigo-400
 }
 
 a {
-    @apply text-sky-600 underline underline-offset-[6px] dark:text-sky-500
+    @apply text-indigo-600 underline underline-offset-[6px] dark:text-indigo-400 transition-colors
+}
+
+a:hover {
+    @apply text-indigo-500 dark:text-indigo-300
 }
 
 blockquote {
-    @apply bg-sky-100 px-7 py-7 rounded-lg text-slate-600 dark:bg-slate-900 dark:text-slate-300
+    @apply bg-indigo-50 px-7 py-7 rounded-lg text-slate-600 border-l-4 border-indigo-400 dark:bg-slate-800 dark:text-slate-300 dark:border-indigo-500
 }
 
 table {
@@ -97,15 +112,76 @@ table {
 }
 
 th, td {
-    @apply border border-slate-400 p-2
+    @apply border border-slate-300 dark:border-slate-600 p-2
 }
 
 thead {
-    @apply bg-slate-200 dark:bg-slate-900
+    @apply bg-slate-100 dark:bg-slate-800
 }
 
 .btn {
     @apply hover:no-underline dark:text-white dark:no-underline
+}
+
+/* ===== NEW: Section headings ===== */
+.section-label {
+    @apply text-xs uppercase tracking-[0.2em] text-indigo-500 dark:text-indigo-400 font-semibold mb-2
+}
+
+.section-title {
+    @apply text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-emerald-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-emerald-400
+}
+
+/* ===== NEW: Glass card ===== */
+.glass-card {
+    @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/60 dark:border-slate-700/60 rounded-2xl shadow-lg shadow-slate-200/50 dark:shadow-black/20 transition-all duration-300
+}
+
+.glass-card:hover {
+    @apply -translate-y-1 shadow-xl shadow-slate-300/50 dark:shadow-black/30 border-indigo-200 dark:border-indigo-800
+}
+
+/* ===== NEW: Skill icon card ===== */
+.skill-card {
+    @apply flex flex-col items-center p-4 rounded-xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-md hover:border-indigo-200 dark:hover:border-indigo-700 transition-all duration-300 hover:-translate-y-0.5
+}
+
+.skill-icon {
+    @apply w-10 h-10 mb-2 text-indigo-500 dark:text-indigo-400
+}
+
+/* ===== NEW: CTA buttons ===== */
+.btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold no-underline text-sm
+           bg-indigo-600 text-white hover:bg-indigo-700
+           dark:bg-indigo-500 dark:hover:bg-indigo-400 dark:text-white
+           shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40
+           transition-all duration-300 hover:-translate-y-0.5
+}
+
+.btn-secondary {
+    @apply inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold no-underline text-sm
+           border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-50
+           dark:border-indigo-400 dark:text-indigo-400 dark:hover:bg-indigo-400/10
+           transition-all duration-300 hover:-translate-y-0.5
+}
+
+/* ===== NEW: Section divider ===== */
+.section-divider {
+    @apply w-24 h-1 bg-gradient-to-r from-indigo-500 to-emerald-500 rounded-full mx-auto mb-8
+}
+
+/* ===== NEW: Timeline dot for posts ===== */
+.tag-pill {
+    @apply inline-block px-3 py-1 rounded-full text-xs font-medium
+           bg-indigo-50 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300
+           border border-indigo-100 dark:border-indigo-800
+           transition-colors hover:bg-indigo-100 dark:hover:bg-indigo-800/50
+}
+
+/* ===== NEW: Reading time badge ===== */
+.reading-time {
+    @apply inline-flex items-center gap-1 text-xs text-slate-400 dark:text-slate-500
 }
 
 /* syntax highlighter: monokai */

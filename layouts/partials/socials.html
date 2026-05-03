@@ -3,7 +3,7 @@
     {{ range .Site.Data.social.social_icons }}
       {{- if isset $.Site.Author .id }}
         <li class="m-3">
-          <a href="{{ printf .url (index $.Site.Author .id) }}" class="text-slate-900 dark:text-slate-50 hover:text-sky-600 dark:hover:text-sky-500" title="{{ .title }}" target="_blank">
+<a href="{{ printf .url (index $.Site.Author .id) }}" class="text-slate-400 dark:text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title="{{ .title }}" target="_blank" rel="noopener">
             <i data-feather="{{ .icon }}"></i>
           </a>
         </li>

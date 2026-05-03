@@ -1,67 +1,72 @@
-<div class="bg-white overflow-hidden rounded-lg shadow-md dark:bg-slate-900 dark:shadow-slate-700">
-
-  <div>
-    <!-- image  -->
-    <div class="overflow-hidden max-h-[208px]">
-      <a href="{{ if isset .Params "featured_image" }}  
+{{ $site := .Site }}
+<div class="glass-card overflow-hidden flex flex-col h-full group">
+  
+  <!-- image  -->
+  <div class="overflow-hidden max-h-[200px]">
+    <a href="{{ if isset .Params "featured_image" }}  
+    {{- $image := .Resources.GetMatch (.Params.featured_image) -}}
+    {{- $image.RelPermalink -}}
+    {{ else }}
+    {{- printf "%s%s" $site.BaseURL $site.Params.default_image -}}
+    {{ end }}" target="_blank" rel="noopener">
+      <img data-src="{{ if isset .Params "featured_image" }}  
       {{- $image := .Resources.GetMatch (.Params.featured_image) -}}
+      {{- $image = $image.Resize "x200 webp" -}}
       {{- $image.RelPermalink -}}
       {{ else }}
-      {{- printf "%s%s" .Site.BaseURL .Site.Params.default_image -}}
-      {{ end }}" target="_blank">
-        <img data-src="{{ if isset .Params "featured_image" }}  
-        {{- $image := .Resources.GetMatch (.Params.featured_image) -}}
-        {{- $image = $image.Resize "x208 webp" -}}
-        {{- $image.RelPermalink -}}
-        {{ else }}
-        {{- printf "%s%s" .Site.BaseURL .Site.Params.default_image -}}
-        {{ end }}" class="lozad min-h-[13rem] object-cover w-full" alt="{{ .Title }}'s featured image">
-      </a>
-    </div>
+      {{- printf "%s%s" $site.BaseURL $site.Params.default_image -}}
+      {{ end }}" class="lozad min-h-[12.5rem] object-cover w-full group-hover:scale-105 transition-transform duration-500" alt="{{ .Title }}'s featured image">
+    </a>
+  </div>
 
-    <!-- body  -->
-    <div class="p-5">
+  <!-- body  -->
+  <div class="p-5 flex-1">
 
-      <!-- title  -->
-      <h3>{{ .Title }}</h3>
+    <!-- title  -->
+    <h3 class="text-xl font-bold text-slate-900 dark:text-slate-50 mb-2">{{ .Title }}</h3>
 
-      <!-- summary  -->
-      <p class="mb-0">
-        {{- if .Truncated -}} 
-          {{- printf "%s%s" .Summary "..." -}} 
-        {{ else }}
-          {{- .Summary -}}
-        {{ end }}
-      </p>
+    <!-- summary  -->
+    <p class="mb-0 text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+      {{- if .Truncated -}} 
+        {{- printf "%s%s" .Summary "..." -}} 
+      {{ else }}
+        {{- .Summary -}}
+      {{ end }}
+    </p>
 
-    </div>
   </div>
 
   <!-- footer -->
   <div class="px-5 pb-5">
-    <!-- tags  -->
-
-      {{ with .Params.stack }}
-        <ul class="flex flex-wrap justify-start list-none mb-4 -m-1 pl-0">
-          {{ range . }}
-            <li class="m-1">
-              {{ partial "badges/skill.html" . }}
-            </li>
-          {{ end }}
-        </ul>
-      {{ end }}
+    {{ with .Params.stack }}
+      <ul class="flex flex-wrap justify-start list-none mb-3 -m-1 pl-0">
+        {{ range . }}
+          <li class="m-1">
+            <span class="inline-block px-2.5 py-0.5 rounded-md text-xs font-medium bg-indigo-50 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 border border-indigo-100 dark:border-indigo-800">
+              {{ . }}
+            </span>
+          </li>
+        {{ end }}
+      </ul>
+    {{ end }}
 
     <!-- links  -->
-    <ul class="flex flex-row justify-start list-none mb-0 pl-0">
+    <ul class="flex flex-row justify-start list-none mb-0 pl-0 gap-2">
       {{ with .Params.website }}
-        <li class="m-1 h-5">
-          {{ partial "links/website.html" . }}
+        <li>
+          <a href="{{ . }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 no-underline transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Website
+          </a>
         </li>
       {{ end }}
 
       {{ with .Params.repo }}
-        <li class="m-1 h-5">
-          {{ partial "links/repo.html" . }}
+        <li>
+          <a href="{{ . }}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-medium text-slate-500 hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400 no-underline transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Repo
+          </a>
         </li>
       {{ end }}
     </ul>

@@ -68,7 +68,9 @@
 <meta itemprop="image" content="{{ $ogimage.Permalink }}" />
 <meta image="{{ $ogimage.Permalink }}">
 
-<meta name="robots" content="index,follow" /> 
-<meta name="googlebot" content="index,follow" />
+{{ $robots := "index,follow" }}
+{{ if eq .Section "projects" }}{{ $robots = "noindex,follow" }}{{ end }}
+<meta name="robots" content="{{ $robots }}" /> 
+<meta name="googlebot" content="{{ $robots }}" />
 
 <title>{{ $title }}</title>
