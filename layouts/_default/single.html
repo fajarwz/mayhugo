@@ -65,7 +65,7 @@
   
         </div>
   
-        <div class="col-span-1 md:col-span-4">
+        <div class="col-span-1 md:col-span-4 mt-4">
           <div>
             <div class="flex items-center gap-4 mb-4">
               {{ with resources.Get ($site.Params.pp) }}
@@ -103,11 +103,11 @@
             {{ end }}
           </div>
           
-          {{- if isset $site.Data "ads" }}
+          {{- with $site.Data.ads.ads -}}
           <div>
             <div class="mb-6"><strong>Ads</strong></div>
             <ul class="flex flex-wrap list-none mb-0 pl-0 justify-center">
-              {{ range $site.Data.ads.ads }}
+              {{ range . }}
                 <li class="mb-6 max-w-xs px-2">
                   {{ if isset . "rawhtml" }}
                     {{ safeHTML .rawhtml }}
@@ -124,7 +124,7 @@
               {{- end -}}
             </ul>
           </div>
-          {{ end }}
+          {{- end -}}
         </div>
 
       </div>

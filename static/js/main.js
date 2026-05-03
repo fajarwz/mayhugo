@@ -208,12 +208,9 @@ function toggleCollapsible(el) {
   el.classList.toggle("active");
   el.classList.toggle("rounded-b-lg");
 
-  var content = el.nextElementSibling;
-  if (content.style.display === "block") {
-    content.style.display = "none";
-  } else {
-    content.style.display = "block";
-  }
+  const content = el.nextElementSibling;
+
+  content.classList.toggle("hidden");
 }
 
 function hideTocWhenClicked()
@@ -231,6 +228,25 @@ function hideTocWhenClicked()
   }
 }
 
+function collapseTocOnClickOutside() {
+  document.addEventListener('click', function(e) {
+    const tocContainers = document.getElementsByClassName("toc-container");
+
+    for (let i = 0; i < tocContainers.length; i++) {
+      const coll = tocContainers[i].querySelector(".collapsible");
+      const content = tocContainers[i].querySelector(".collapsible + div");
+
+      if (
+        !tocContainers[i].contains(e.target) &&
+        content &&
+        !content.classList.contains("hidden")
+      ) {
+        toggleCollapsible(coll);
+      }
+    }
+  });
+}
+
 (function() {
     transitionAfterPageLoad();
     feather.replace();
@@ -239,6 +255,7 @@ function hideTocWhenClicked()
     navbarShrink();
     makeCollapsibleCollapsible();
     hideTocWhenClicked();
+    collapseTocOnClickOutside();
 
     document
         .getElementById("hamburger-btn")
