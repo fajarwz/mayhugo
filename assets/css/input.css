@@ -84,15 +84,19 @@ ul, ol {
 }
 
 .code-block-wrapper {
-    @apply relative group mb-4
+    @apply relative mb-4
 }
 
 .code-block-wrapper .copy-code-btn {
     @apply absolute top-2 right-2 z-10 flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium
            bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300
-           opacity-0 group-hover:opacity-100 transition-opacity
+           opacity-0 transition-opacity
            hover:bg-slate-300 dark:hover:bg-slate-600
            border border-slate-300 dark:border-slate-600
+}
+
+.code-block-wrapper:hover .copy-code-btn {
+    @apply opacity-100;
 }
 
 pre {
