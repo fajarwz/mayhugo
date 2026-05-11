@@ -251,6 +251,7 @@
   </section>
 
   <script>
+    /* ---- Copy post link ---- */
     document
       .getElementById("copy-link")
       .addEventListener("click", function () {
@@ -268,5 +269,93 @@
               document.getElementById("link-copied-notif").classList.add("hidden")
           }, 3000)
       });
+
+    /* ---- Copy code blocks ---- */
+    (function () {
+      const article = document.querySelector("article");
+      if (!article) return;
+
+      function createCopyButton(codeText) {
+        const btn = document.createElement("button");
+
+        btn.className =
+          "copy-code-btn absolute top-3 right-3 z-10 flex items-center gap-1 rounded-lg px-3 py-1 text-sm bg-slate-800 text-white hover:bg-slate-700 transition-colors";
+
+        btn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+          <span>Copy</span>
+        `;
+
+        btn.addEventListener("click", async () => {
+          await navigator.clipboard.writeText(codeText);
+
+          btn.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>Copied!</span>
+          `;
+
+          setTimeout(() => {
+            btn.innerHTML = `
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"/>
+              </svg>
+              <span>Copy</span>
+            `;
+          }, 2000);
+        });
+
+        return btn;
+      }
+
+      function wrapCodeBlock(element, codeText) {
+        if (element.dataset.copyInitialized) return;
+
+        element.dataset.copyInitialized = "true";
+
+        // Force proper positioning context
+        element.style.position = "relative";
+
+        // Prevent button covering code
+        const pre = element.querySelector("pre");
+        if (pre) {
+          pre.style.position = "relative";
+        }
+
+        const btn = createCopyButton(codeText);
+
+        btn.style.position = "absolute";
+        btn.style.top = "8px";
+        btn.style.right = "8px";
+
+        element.appendChild(btn);
+      }
+
+      // Hugo highlighted blocks
+      article.querySelectorAll(".highlight").forEach((highlight) => {
+        const code = highlight.querySelector("code");
+        if (!code) return;
+
+        wrapCodeBlock(highlight, code.innerText);
+      });
+
+      // Plain pre blocks
+      article.querySelectorAll("pre").forEach((pre) => {
+        if (pre.closest(".highlight")) return;
+
+        wrapCodeBlock(pre, pre.innerText);
+      });
+    })();
   </script>
 {{ end }}
