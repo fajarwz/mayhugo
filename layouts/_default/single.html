@@ -279,7 +279,7 @@
         const btn = document.createElement("button");
 
         btn.className =
-          "copy-code-btn absolute top-3 right-3 z-10 flex items-center gap-1 rounded-lg px-3 py-1 text-sm bg-slate-800 text-white hover:bg-slate-700 transition-colors";
+          "copy-code-btn absolute top-3 right-3 flex items-center gap-1 rounded-lg px-3 py-1 text-sm bg-slate-800 text-white hover:bg-slate-700 transition-colors";
 
         btn.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
@@ -347,14 +347,14 @@
         const code = highlight.querySelector("code");
         if (!code) return;
 
-        wrapCodeBlock(highlight, code.innerText);
+        wrapCodeBlock(highlight, code.textContent.replace(/\n{2,}$/, "\n"));
       });
 
       // Plain pre blocks
       article.querySelectorAll("pre").forEach((pre) => {
         if (pre.closest(".highlight")) return;
 
-        wrapCodeBlock(pre, pre.innerText);
+        wrapCodeBlock(pre, pre.textContent.replace(/\n{2,}$/, "\n"));
       });
     })();
   </script>
