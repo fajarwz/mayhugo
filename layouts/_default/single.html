@@ -48,7 +48,7 @@
           </div>
   
           {{ if (gt .WordCount 100 ) }}
-          <div class="toc-container sticky top-16 md:top-14 transition-all mb-4">
+          <div class="toc-container sticky top-16 md:top-14 transition-all mb-4 z-[5]">
             <button type="button" class="collapsible bg-indigo-50 dark:bg-slate-800 border border-indigo-200 dark:border-slate-700 cursor-pointer flex justify-between items-center font-bold px-7 py-3 rounded-t-lg rounded-b-lg text-left w-full text-slate-800 dark:text-slate-100 hover:bg-indigo-100 dark:hover:bg-slate-700 transition-colors">
               <span class="m-0">Table of Contents</span>
               <i data-feather="plus" class="w-4 h-4 stroke-[3px]"></i>
@@ -326,6 +326,7 @@
 
         // Force proper positioning context
         element.style.position = "relative";
+        element.style.zIndex = "0";
 
         // Prevent button covering code
         const pre = element.querySelector("pre");
@@ -338,6 +339,7 @@
         btn.style.position = "absolute";
         btn.style.top = "8px";
         btn.style.right = "8px";
+        btn.style.zIndex = "1"; // just needs to sit above its own <pre>, not above the page
 
         element.appendChild(btn);
       }

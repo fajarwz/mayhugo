@@ -628,6 +628,18 @@ video {
   z-index: 10;
 }
 
+.z-0 {
+  z-index: 0;
+}
+
+.z-\[\] {
+  z-index: ;
+}
+
+.z-\[5\] {
+  z-index: 5;
+}
+
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
